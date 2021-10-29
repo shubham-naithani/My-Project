@@ -1,0 +1,67 @@
+<div class="background-image">
+  <img src="../../../assets/images/logo.jpg">
+
+  <mat-card class="example-card">
+    <form id="register-as-student" [formGroup]="registerform" (submit)="submit()" autocomplete="off">
+      <h2>Registration Form</h2>
+
+      <mat-form-field appearance="standard">
+        <mat-label>FirstName</mat-label>
+        <input matInput placeholder="enter first name" formControlName="FirstName">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field><br>
+
+      <mat-form-field appearance="standard">
+        <mat-label>LastName</mat-label>
+        <input matInput placeholder="enter last name" formControlName="LastName">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field><br>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Email</mat-label>
+        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com" formControlName="Email">
+        <mat-error *ngIf="registerform.controls.Email.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-icon style="display: flex;" matSuffix>email</mat-icon>
+      </mat-form-field><br>
+
+      <div class="example-container">
+        <mat-form-field appearance="standard">
+          <mat-label>Password</mat-label>
+          <input  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" matInput [type]="hide ? 'Password' : 'text'" formControlName="Password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="example-full-width" appearance="standard">
+        <mat-label>Select DOB</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="DOB">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>cake</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field><br>
+
+      <mat-form-field appearance="standard">
+        <mat-label>ContactNo</mat-label>
+        <input matInput placeholder="enter your mobile no" formControlName="ContactNo">
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field><br><br>
+
+      <label>Your Role</label>
+      <mat-radio-group aria-label="Role" formControlName="Role">
+        <mat-radio-button value="Student">Student</mat-radio-button>
+        <mat-radio-button value="Teacher">Teacher</mat-radio-button>
+      </mat-radio-group><br><br><br>
+
+      <button style="float: left;" mat-raised-button color="primary" type="reset">Reset</button>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <app-progress-bar *ngIf="spinner" class="backgroundchange"></app-progress-bar>
+    </form>
+  </mat-card>
+</div>

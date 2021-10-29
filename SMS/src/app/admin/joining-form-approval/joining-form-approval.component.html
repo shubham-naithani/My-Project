@@ -1,0 +1,42 @@
+<div class="mainbody">
+    <div class="right-box">
+        <table>
+            <tr>
+                <th>FullName</th>
+                <th>Email</th>
+                <th>ContactNo</th>
+                <th>DOB</th>
+                <th>Qualification</th>
+                <th>SubjectsYouCanTeach</th>
+                <th>ExperienceOfTeaching</th>
+                <th style="color: green;font-size: x-large;">Approved</th>       
+                <th>ClassesYouWillTeach</th>
+                <th>YourPeriods</th>               
+            </tr>
+            <tr *ngFor="let item of Data" >
+                <td>{{item.FullName}}</td>
+                <td>{{item.Email}}</td>
+                <td>{{item.ContactNo}}</td>
+                <td>{{item.DOB}}</td>
+                <td>{{item.Qualification}}</td>
+                <td>{{item.SubjectsYouCanTeach}}</td>
+                <td>{{item.ExperienceOfTeaching}}</td>
+                <td>{{item.Approved}}</td>
+                <input type="text">
+             <!-- <td><button (click)="editForm2(item)"><img src="../../../assets/images/edit.png" style="width: 20px;height: 20px;"></button></td> -->
+               <!-- <td><button (click)="deletestudent(item.Student_ID)"><img src="../../../assets/images/trash.png" style="width: 20px;height: 20px;"></button></td> -->
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

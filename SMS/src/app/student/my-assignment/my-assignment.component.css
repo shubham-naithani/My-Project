@@ -1,0 +1,76 @@
+.head{
+    width: 100%;
+    height: 500px;
+    /* margin-left: 5em; */
+}
+.head h1{
+    margin-left: 24em;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: 500;
+    margin-top: 5em;
+}
+.my-projects{
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+    box-shadow: 6px 5px rgba(255, 0, 0, 0.747);
+    background-color:rgba(255, 0, 0, 0.747);
+    border-radius: 30px;
+    margin-left: 36em;
+    margin-top: 5em;
+}
+.my-projects img{
+    width: 60px;
+    height: 60px;
+    margin-left: 8em;
+    margin-top: 4em;
+}
+.my-projects a{
+    margin-left: 2.3em;
+    font-family: sans-serif;
+    text-decoration: none;
+    padding: 80px;
+    color: #000;
+}
+.my-projects li{
+    margin-top: 1em;
+    list-style: none;
+}
+.my-projects a:hover{
+    color:#fff;
+}
+.upload-projects{
+    position: relative;
+    left: 22em;
+    bottom: 22.5em;
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+    box-shadow: 6px 5px rgba(0, 128, 0, 0.712);
+    background-color: rgba(6, 194, 6, 0.74);
+    border-radius: 30px;
+    margin-left: 38em;
+    margin-top: 8em;
+}
+.upload-projects img{
+    width: 60px;
+    height: 60px;
+    margin-left: 8em;
+    margin-top: 4em;
+}
+.upload-projects a{
+    margin-left: 1.4em;
+    font-family: sans-serif;
+    text-decoration: none;
+    padding: 80px;
+    color: #000; 
+}
+.upload-projects li{
+    margin-top: 1em;
+    list-style: none;
+    
+}
+.upload-projects a:hover{
+   color:#fff;
+}

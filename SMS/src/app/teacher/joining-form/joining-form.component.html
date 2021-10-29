@@ -1,0 +1,134 @@
+<div class="main-body">
+  <form id=joiningform [formGroup]="joiningform" (submit)="submit()">
+    <h2 style="margin-left:28.5em;margin-top: 1em;margin-bottom: 2em;">Joining Form</h2>
+
+    <mat-form-field appearance="standard">
+      <mat-label>FirstName</mat-label>
+      <input matInput placeholder="enter your first name" formControlName="FirstName">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>LastName</mat-label>
+      <input matInput placeholder="enter your last name" formControlName="LastName">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field><br>
+
+
+    <mat-form-field class="example-full-width" appearance="standard">
+      <mat-label>DOB</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="DOB">
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>cake</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Age</mat-label>
+      <input matInput placeholder="enter your age" formControlName="Age">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field><br>
+
+
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Enter your email</mat-label>
+      <input  matInput placeholder="pat@example.com" formControlName="Email" required>
+      <mat-error *ngIf="joiningform.controls.Email.invalid">{{getErrorMessage()}}</mat-error>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    
+    <mat-radio-group aria-label="Select an option" formControlName="Gender">
+      <label>Gender</label>
+      <mat-radio-button value="Male">Male</mat-radio-button>
+      <mat-radio-button value="Female">Female</mat-radio-button>
+      <mat-radio-button value="Others">Others</mat-radio-button>
+    </mat-radio-group><br>
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>ContactNo</mat-label>
+      <input matInput formControlName="ContactNo" required />
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-hint>Include area code</mat-hint>
+    </mat-form-field>
+
+
+    <mat-radio-group aria-label="Select an option" formControlName="Cast">
+      <label>Cast</label>
+      <mat-radio-button value="General">General</mat-radio-button>
+      <mat-radio-button value="SC/ST">SC/ST</mat-radio-button>
+      <mat-radio-button value="OBC">OBC</mat-radio-button>
+    </mat-radio-group><br>
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Address</mat-label>
+      <input matInput placeholder="enter your address" formControlName="ADDRESS">
+      <mat-icon matSuffix>house</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+   
+
+
+    <mat-radio-group aria-label="Select an option" formControlName="Religion">
+      <label>Religion</label>
+      <mat-radio-button value="Hindu">Hindu</mat-radio-button>
+      <mat-radio-button value="Christian">Christian</mat-radio-button>
+      <mat-radio-button value="Muslim">Muslim</mat-radio-button>
+    </mat-radio-group><br>
+  
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Nationality</mat-label>
+      <input matInput placeholder="enter your nationality" formControlName="Nationality">
+      <mat-icon matSuffix>flag</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>MaritialStatus</mat-label>
+      <input matInput placeholder="enter your Maritial_Status" formControlName="MaritialStatus">
+      <mat-icon matSuffix>sentiment_neutral</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field><br>
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>Qualification</mat-label>
+      <input matInput placeholder="enter your Qualification" formControlName="Qualification">
+      <mat-icon matSuffix>school</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="standard">
+      <mat-label>SubjectsYouCanTeach</mat-label>
+      <input matInput placeholder="enter Subjects_You_Can_Teach" formControlName="SubjectsYouCanTeach">
+      <mat-icon matSuffix>subject</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field><br>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Experience of teaching</mat-label>
+      <mat-select formControlName="ExperienceOfTeaching">
+        <mat-option value="Fresher">Fresher</mat-option>
+        <mat-option value="Lessthen2year">Less then 2 year</mat-option>
+        <mat-option value="Lessthen5years">Less then 5 years</mat-option>
+        <mat-option value="Morethen10years">More then 10 years</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="warn" type="reset">Reset</button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>

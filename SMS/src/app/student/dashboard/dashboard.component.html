@@ -1,0 +1,19 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="over" >
+    <app-side-bar>
+                
+    </app-side-bar>
+    </mat-sidenav>      
+
+    <mat-sidenav-content>
+        <mat-toolbar>
+            <button (click)="sidenav.toggle()" mat-icon-button class="material-icon-outlined"><mat-icon>menu</mat-icon></button> 
+            <span class="example-fill-remaining-space"></span>
+            <span style="font-family: sans-serif;" class="student-text">WELCOME : STUDENT</span>
+            <button mat-button class="material-icon-outlined" (click)="logout()"><mat-icon>logout</mat-icon></button>
+        </mat-toolbar>
+        <div class="main-count">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

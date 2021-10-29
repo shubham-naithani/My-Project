@@ -1,0 +1,19 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+    </button>
+    <span style="color: black;"></span>
+    <span class="example-spacer"></span>
+
+    <button mat-button [matMenuTriggerFor]="animals">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #animals="matMenu">
+        <button mat-menu-item (click)="login()">Login</button>
+        <button mat-menu-item (click)="register()">Register</button>
+    </mat-menu>
+
+    <button mat-icon-button class="example-icon">
+        <mat-icon (click)="settings()">settings</mat-icon>
+    </button>
+</mat-toolbar>

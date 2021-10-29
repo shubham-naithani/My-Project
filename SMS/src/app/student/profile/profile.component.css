@@ -1,0 +1,44 @@
+/* .profile{
+    width: 100%;
+    height: auto;
+    margin-top: 10em;
+}
+.profile img{
+    width: 90px;
+    height: 90px;
+    margin-left: 56em;
+}
+.profile p{
+    position: relative;
+    left:46em;
+    top: 2.8em;
+}
+.profile h2{
+    margin-left: 31em;
+    font-size: 28px;
+    font-family: sans-serif;
+    font-weight: 500;
+   
+}
+.profile input  {
+    padding: 10px 40px;
+    margin-top: 10px;
+    margin-left: 61em;
+    border-radius: 10px;
+
+
+}
+.profile button{
+    margin-left: 61em;
+    margin-top: 1em;
+    padding: 10px 10px;
+    border-radius: 20px;
+    background: #fb2525;
+}   
+.profile button:hover{
+    background-color:  #ffc107;
+    transition: 1s;
+    color: #fff;
+
+}
+ */

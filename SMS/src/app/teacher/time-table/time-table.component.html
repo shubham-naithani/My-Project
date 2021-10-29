@@ -1,0 +1,22 @@
+<div class="head">
+    <h1>Your Time Table</h1>
+    <div class="table">
+        <table border=2>
+         <tr>
+            <td style="text-align: center;font-weight:750;font-family:sans-serif;">Days</td>
+            <td style="text-align: center;font-weight:750;font-family:sans-serif;">Subjects you will teach</td>
+            <td style="text-align: center;font-weight:750;font-family:sans-serif;">Classes you will teach</td>
+            <td style="text-align: center;font-weight:750;font-family:sans-serif;">Period</td>
+            <td style="text-align: center;font-weight:750;font-family:sans-serif;">Free-Periods</td>
+        </tr>
+
+            <tr *ngFor="let data of timeTable">
+                <td style="text-align: center;">{{data.Days}}</td>
+                <td style="text-align: center;">{{data.subject}}</td>
+                <td style="text-align: center;">{{data.class}}</td>
+                <td style="text-align: center;">{{data.period}}</td>
+                <td style="text-align: center;">{{data.FreePeriods}}</td>
+            </tr>
+        </table>
+    </div>
+    </div>

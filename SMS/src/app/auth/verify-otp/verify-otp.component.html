@@ -1,0 +1,21 @@
+<div class="background-image">
+  <img src="../../../assets/images/logo.jpg">
+  <div class="verify">
+    <mat-card class="example-card">
+      <form id="verify-otp" [formGroup]="verifyotp " (submit)="submitForm()">
+        <h1>Verify OTP Here</h1>
+        <mat-form-field appearance="standard">
+          <mat-label>Standard form field</mat-label>
+          <input matInput placeholder="Placeholder" formControlName="OTP">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field><br>
+        <button type="submit">Verify</button>
+        <div *ngIf="showresend">
+          <a href="./resendotp" class="btn">resend OTP</a>
+          <app-progress-bar *ngIf="spinner" class="backgroundchange"></app-progress-bar>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

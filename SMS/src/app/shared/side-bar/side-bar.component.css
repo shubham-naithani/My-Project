@@ -1,0 +1,19 @@
+.profile-info img{
+    width: 150px;
+    height: 150px;
+    margin-left: 3.8em;
+    margin-top: 5em;
+    border-radius: 50%;
+}
+.profile-info p{
+    text-align: center;
+    margin-top: 1em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+a{
+    color: white !important;
+    text-transform: uppercase;
+    /* line-height: 10px !important; */
+}

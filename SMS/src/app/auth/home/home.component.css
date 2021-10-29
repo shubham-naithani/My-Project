@@ -1,0 +1,56 @@
+.body img{
+    width: 100%;
+    height:732.4px;
+}
+.body h1{
+    position: absolute;
+    font-size: 30px;
+    font-weight:500;
+    top: 13em;
+    left:0.5em;
+    font-family:'Times New Roman', Times, serif;
+    color: rgba(255, 255, 255, 0.795);
+    line-height:40px;
+    /* z-index: 5;   */
+    overflow: hidden; 
+    border-right: .15em solid rgb(184, 128, 9); 
+    white-space: nowrap;
+    margin: 0 auto; 
+    letter-spacing: .15em; 
+    animation: 
+    typing 7s steps(100,end),
+    blink-caret .60s step-end infinite;
+}
+@keyframes typing {
+    from { width: 0 }
+    to { width: 40% }
+  }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color:  rgb(184, 128, 9); }
+  }
+.body h2{
+    position: absolute;
+    font-size: 40px;
+    font-weight:bolder;
+    font-family:'Times New Roman', Times, serif;
+    top: 3em;
+    left: 6em;
+    color: rgba(255, 255, 255, 0.795);
+    line-height:40px;
+    font-weight: 500;
+    z-index: 5;
+}
+/* .body::after{
+    content: "";
+    position: absolute;
+    top:64px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 737px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity:1; 
+    z-index: 2;
+  } */

@@ -1,0 +1,18 @@
+<div class="background-image">
+  <img src="../../../assets/images/logo.jpg">
+  <div class="resend">
+    <mat-card class="example-card">
+      <form id="resendotp" [formGroup]="resendotpform" (submit)="submitForm()">
+        <h1>Resend otp</h1>
+        <mat-form-field appearance="standard">
+          <mat-label>ContactNo</mat-label>
+          <input matInput placeholder="enter your contact no" formControlName="ContactNo">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field><br>
+        <button type="submit">Resend</button>
+        <app-progress-bar *ngIf="spinner" class="backgroundchange"></app-progress-bar>
+      </form>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+  }
+  .example-container .mat-form-field + .mat-form-field {
+    margin-left: 20px;
+  }
+  .login-box h1{
+    font-size: 40px;
+    float: left;
+    border-bottom: 4px solid #3f51b5;
+    margin-bottom: 50px;
+    padding: 13px 0;
+  }
+  .login-box form{
+    width: 100%;
+    margin-left: 2.5em;
+    margin-top: 1em;
+    margin-bottom: 3em; 
+  }
+  .login-box img{
+    width: 100%;
+    /* z-index: -1; */
+    height:732.4px;
+  }
+  button {
+    cursor: pointer;
+    /* background: none; */
+    border: 2px solid;  
+    color:  #3f51b5;
+    padding: 5px;
+    height: 35px;
+    width: 280px;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+  button:hover{
+    background-color: #3f51b5;
+    color: #fff;
+  }
+  .login-box a{
+    position: relative;
+    right: 19em;
+    top: 1em;
+    text-decoration: none;
+    color: rgb(109, 106, 106);
+    line-height: 20px;
+    font-size: 12.6px;
+    margin-right: 10em;
+    cursor: pointer;
+  }
+  .login-box a:hover{
+    color: #000;
+  }
+  mat-form-field {
+    width: 80%;
+    padding-top: 15px;
+    color: #000;
+    /* opacity:0.51; */
+  }
+  .example-card {
+    position: absolute;
+    bottom: 10em;
+    width: 350px;
+    margin-top: 10em;
+    margin-left: 10em;
+    padding: 20px 30px;
+    z-index:1;
+  }  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  } 
+  app-progress-bar{
+    z-index: 2;
+    position: absolute;
+  }
+  .backgroundchange {
+    position: fixed;
+    /* filter: blur(8px); */
+    top: 64px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 737px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.329);
+    opacity: 1; 
+    z-index: 1;
+  }
+ 
