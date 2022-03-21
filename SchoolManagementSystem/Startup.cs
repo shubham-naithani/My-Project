@@ -31,7 +31,7 @@ namespace SchoolManagementSystem
             services.AddCors();
             services.AddSwaggerGen();
             services.AddControllers();
-            var con = "server=TACTCS;database=SchoolManagementSystem;Trusted_connection=True;";
+            var con = "server=localhost;database=SchoolManagementSystem;Trusted_connection=True;";
             services.AddDbContext<SMSContext>(options => options.UseSqlServer(con));
             services.AddSingleton<SendOtp, SendOtp>();
         }

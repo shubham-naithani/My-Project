@@ -8,6 +8,8 @@ using SchoolManagementSystem.Model;
 using System;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
@@ -45,7 +47,6 @@ namespace SchoolManagementSystem.Controllers
                 int result = r.Next(1000, 9999);
                 DateTime OtpGenerate = DateTime.UtcNow;
 
-                //Enter student related code
                 var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false && x.ContactNo == "+91" + mod.ContactNo);
                 if (data != null)
                 {
@@ -54,12 +55,14 @@ namespace SchoolManagementSystem.Controllers
                 }
                 else
                 {
+                    using var hmac = new HMACSHA512();
                     RegisterationTable reg = new RegisterationTable
                     {
                         FirstName = mod.FirstName,
                         LastName = mod.LastName,
                         Email = mod.Email,
-                        //Password = mod.Password,
+                        PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(mod.Password)),
+                        PasswordSalt = hmac.Key,
                         DOB = mod.DOB,
                         ContactNo = "+91" + mod.ContactNo,
                         Role = mod.Role,
@@ -116,6 +119,17 @@ namespace SchoolManagementSystem.Controllers
             try
             {
                 var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false && x.Email == log.Email );
+
+                using var hmac = new HMACSHA512(data.PasswordSalt);
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(log.Password));
+
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != data.PasswordHash[i])
+                    {
+                        response.Message = "Invalid Password";
+                    }
+                }
 
                 if (data != null)
                 {
@@ -304,7 +318,12 @@ namespace SchoolManagementSystem.Controllers
                 var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false );
                 if (data != null)
                 {
-                    //data.Password = reset.Password;
+                    using var hmac = new HMACSHA512();
+                    RegisterationTable reg = new RegisterationTable
+                    {
+                        PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(reset.Password)),
+                        PasswordSalt = hmac.Key,
+                    };                   
                     sms.Registeration_tbl.Update(data);
                     int Issaved = sms.SaveChanges();
                     if (Issaved > 0)
