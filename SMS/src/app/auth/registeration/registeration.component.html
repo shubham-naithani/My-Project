@@ -9,20 +9,17 @@
         <mat-label>FirstName</mat-label>
         <input matInput placeholder="enter first name" formControlName="FirstName">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
       </mat-form-field><br>
 
       <mat-form-field appearance="standard">
         <mat-label>LastName</mat-label>
         <input matInput placeholder="enter last name" formControlName="LastName">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
       </mat-form-field><br>
 
       <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
         <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com" formControlName="Email">
-        <mat-error *ngIf="registerform.controls.Email.invalid">{{getErrorMessage()}}</mat-error>
         <mat-icon style="display: flex;" matSuffix>email</mat-icon>
       </mat-form-field><br>
 
@@ -50,7 +47,6 @@
         <mat-label>ContactNo</mat-label>
         <input matInput placeholder="enter your mobile no" formControlName="ContactNo">
         <mat-icon matSuffix>phone</mat-icon>
-        <mat-hint>Hint</mat-hint>
       </mat-form-field><br><br>
 
       <label>Your Role</label>
@@ -60,7 +56,7 @@
       </mat-radio-group><br><br><br>
 
       <button style="float: left;" mat-raised-button color="primary" type="reset">Reset</button>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="registerform.invalid">Submit</button>
       <app-progress-bar *ngIf="spinner" class="backgroundchange"></app-progress-bar>
     </form>
   </mat-card>

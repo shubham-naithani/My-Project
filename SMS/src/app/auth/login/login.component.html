@@ -8,8 +8,7 @@
       <div class="example-container">
         <mat-form-field appearance="standard">
           <mat-label>Enter your email</mat-label>
-          <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com" formControlName="Email" required>
-          <!-- <mat-error *ngIf="loginform.controls.Email.invalid">{{getErrorMessage()}}</mat-error> -->
+          <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com" formControlName="Email">
            <mat-error>Valid email is <strong>required</strong></mat-error>
         </mat-form-field>
       </div>
@@ -22,10 +21,9 @@
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
-          <!-- <mat-error>password must be of 8 characters</mat-error> -->
         </mat-form-field>
       </div>
-      <button type="submit" [disabled]="loginform.controls.Email.invalid">login</button>
+      <button type="submit" [disabled]="loginform.invalid">login</button>
       <span style="margin-left: 17.3em;"><a routerLink='/Registeration'>Don't_have_a_account</a></span><br>
       <span style="margin-left: 17.3em;"><a routerLink='/Forget-password'>ForgetPassword?</a></span><br>
       <app-progress-bar *ngIf="spinner" class="backgroundchange"></app-progress-bar>

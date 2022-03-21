@@ -14,7 +14,6 @@ const routes: Routes = [
    {path:"teacher-joining-form",component:JoiningFormComponent},
    {path:"teacher-profile",component:TprofileComponent},
    {path:"teacher-time-table",component:TimeTableComponent}
-   
  ]}
 ];
 

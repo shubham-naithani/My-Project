@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
@@ -14,11 +15,19 @@ export class ResetPasswordComponent implements OnInit {
   successmessage:any;
   spinner:boolean=false;
 
-  constructor(private rp:FormBuilder,private authservice:AuthService,private toast:ToastrService,private route :Router) { }
+  constructor(
+    private rp:FormBuilder,
+    private authservice:AuthService,
+    private toast:ToastrService,
+    private route :Router,
+    private snackBar:MatSnackBar
+    ) { }
 
   ngOnInit() {
     this.resetpass = this.rp.group({
-      Password:[""]
+      Password:['',
+    [Validators.required,Validators.minLength(4),Validators.maxLength(8)]
+  ]
     })
   }
   get formcontrol(){return this.resetpass.controls}
@@ -34,11 +43,10 @@ export class ResetPasswordComponent implements OnInit {
       this.authservice.resetpassword(data).subscribe((res :any) =>{
      
         if(res.statusCode==200){
-          this.successmessage=res.message;
-          this.toast.success(res.message);
+          this.snackBar.open(res.open)
           this.route.navigateByUrl("/Login");
         }else{
-          this.toast.error(res.message)
+          this.snackBar.open(res.open)
         }
         this.spinner=false;
       })

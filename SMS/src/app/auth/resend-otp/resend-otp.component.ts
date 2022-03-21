@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
 
@@ -14,11 +15,18 @@ export class ResendOtpComponent implements OnInit {
   verifyotp:boolean=true;
   spinner:boolean=false;
 
-  constructor(private res:FormBuilder,private authservice:AuthService,private toast:ToastrService) { }
+  constructor(
+    private res:FormBuilder,
+    private authservice:AuthService,
+    private toast:ToastrService,
+    private snackBar:MatSnackBar
+    ) { }
 
   ngOnInit(){
     this.resendotpform=this.res.group({
-      ContactNo:[""]
+      ContactNo:['',
+    [Validators.required,Validators.minLength(10)]
+  ]
     })
   }
   get formcontrol(){return this.resendotpform.controls}
@@ -31,10 +39,9 @@ export class ResendOtpComponent implements OnInit {
     this.authservice.resendOTP(data).subscribe((resend:any)=>{
 
       if (resend.statusCode == 200) {
-        this.successmessage = resend.message;
-        this.toast.success(resend.message)
+        this.snackBar.open(resend.message)
       } else {
-        this.toast.error(resend.message)
+        this.snackBar.open(resend.message)
       }
       this.spinner=false;
     })

@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 export class TeacherDashboardComponent implements OnInit {
 
 
-  constructor(private route:Router) { }
+  constructor(
+    private route:Router
+    ) { }
   // Role:"teacher";
 
   ngOnInit(): void {

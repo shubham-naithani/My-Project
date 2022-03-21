@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class TopBarComponent implements OnInit {
 // @Input() Role:string;
-  constructor(private route:Router) { }
+  constructor(
+    private route:Router
+    ) { }
 
   ngOnInit(): void {
     debugger

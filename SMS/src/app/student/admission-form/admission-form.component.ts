@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StudentService } from '../student.service';
@@ -14,43 +15,71 @@ export class AdmissionFormComponent implements OnInit {
   form: FormGroup
   successmessage: any;
 
-  constructor(private fb: FormBuilder, private toast: ToastrService, private service: StudentService, private route: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private toast: ToastrService,
+    private service: StudentService,
+    private route: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
-    this.admissionform = new FormGroup({
-      FirstName: new FormControl(""),
-      LastName: new FormControl(""),
-      FathersName: new FormControl(""),
-      DOB: new FormControl(""),
-      ADDRESS: new FormControl(""),
-      Email: new FormControl(''),
-      ContactNo: new FormControl(""),
-      Gender: new FormControl(""),
-      Cast: new FormControl(""),
-      Religion: new FormControl(""),
-      Nationality: new FormControl(""),
-      City: new FormControl(""),
-      Pincode: new FormControl(""),
-      State: new FormControl(""),
-      Class: new FormControl("")
+    this.admissionform = this.fb.group({
+      FirstName: ['',
+        [Validators.required]
+      ],
+      LastName: ['',
+        [Validators.required]
+      ],
+      FathersName: ['',
+        [Validators.required]
+      ],
+      DOB: ['',
+        [Validators.required]
+      ],
+      ADDRESS: ['',
+        [Validators.required]
+      ],
+      Email: ['',
+        [Validators.required,Validators.email]
+      ],
+      ContactNo: ['',
+        [Validators.required,Validators.minLength(10)]
+      ],
+      Gender: ['',
+        [Validators.required]
+      ],
+      Cast: ['',
+        [Validators.required]
+      ],
+      Religion: ['',
+        [Validators.required]
+      ],
+      Nationality: ['',
+        [Validators.required]
+      ],
+      City: ['',
+        [Validators.required]
+      ],
+      Pincode: ['',
+        [Validators.required,Validators.minLength(6)]
+      ],
+      State: ['',
+        [Validators.required]
+      ],
+      Class: ['',
+        [Validators.required]
+      ],
     })
   }
 
-  getErrorMessage() {
-    if (this.admissionform.controls.Email.hasError('required')) {
-      return 'You must enter a value';
-    }
-    return this.admissionform.controls.Email.hasError('Email') ? 'Not a valid email' : '';
-  }
-
   submit() {
-    debugger
     let data = this.admissionform.value;
     this.service.Admission(data).subscribe((res: any) => {
       if (res.statusCode == 200) {
-        this.toast.success(res.message);
+        this.snackBar.open(res.message)
       } else {
-        this.toast.error(res.message);
+        this.snackBar.open(res.message)
       }
     })
   }

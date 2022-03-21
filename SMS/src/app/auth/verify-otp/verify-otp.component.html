@@ -8,9 +8,8 @@
           <mat-label>Standard form field</mat-label>
           <input matInput placeholder="Placeholder" formControlName="OTP">
           <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
         </mat-form-field><br>
-        <button type="submit">Verify</button>
+        <button type="submit" [disabled]="verifyotp.invalid">Verify</button>
         <div *ngIf="showresend">
           <a href="./resendotp" class="btn">resend OTP</a>
           <app-progress-bar *ngIf="spinner" class="backgroundchange"></app-progress-bar>

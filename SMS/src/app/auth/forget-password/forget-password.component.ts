@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
@@ -18,13 +19,22 @@ export class ForgetPasswordComponent implements OnInit {
   spinner:boolean=false;
 
 
-  constructor(private fp:FormBuilder,private authservice:AuthService,private toast:ToastrService,private rout:Router) { }
+  constructor(
+    private fp:FormBuilder,
+    private authservice:AuthService,
+    private toast:ToastrService,
+    private rout:Router,
+    private snackBar:MatSnackBar
+    ) { }
 
   ngOnInit(){
     this.forgetpassword = this.fp.group({
-      ContactNo:[""]
+      ContactNo:["",
+    [Validators.required]
+  ]
     });
   }
+
   get formcontrol(){return this.forgetpassword.controls}
   submitform(){
     if(this.forgetpassword.invalid){
@@ -34,7 +44,7 @@ export class ForgetPasswordComponent implements OnInit {
      let data=this.forgetpassword.value
      this.authservice.forgetpassword(data).subscribe((forget: any)=>{      
        if(forget.statusCode==200){
-         this.successmessage=forget.message;
+         this.snackBar.open(forget.messages)
          if (this.successmessage=="Reset") {
            this.showreset=true;
           this.rout.navigateByUrl("/Reset-password");
@@ -43,7 +53,7 @@ export class ForgetPasswordComponent implements OnInit {
           this.rout.navigateByUrl("/Registeration");
          }
        }else{
-       this.toast.error(forget.messages)
+        this.snackBar.open(forget.messages)
        }
      })
      this.spinner=false;

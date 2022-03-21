@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
@@ -16,11 +17,20 @@ export class VerifyOtpComponent implements OnInit {
   Contact_No:any;
   spinner:boolean=false;
 
-  constructor(private otp: FormBuilder, private authservice: AuthService, private route: ActivatedRoute,private toast:ToastrService,private router:Router) { }
+  constructor(
+    private otp: FormBuilder,
+    private authservice: AuthService, 
+    private route: ActivatedRoute,
+    private toast:ToastrService,
+    private router:Router,
+    private snackBar:MatSnackBar
+    ) { }
 
   ngOnInit() {
     this.verifyotp = this.otp.group({
-      OTP:[""]
+      OTP:['',
+    [Validators.required]
+  ]
     })
     // this.Contact_No = this.route.snapshot.queryParamMap.get("Contact_No")
   }
@@ -38,16 +48,16 @@ export class VerifyOtpComponent implements OnInit {
 
       this.authservice.verifyotp(data).subscribe((ver: any) => {
           if (ver.statusCode == 200) {
-          this.successmessage = ver.message;
+            this.snackBar.open(ver.message)
           if (this.successmessage == "OTP Verified") {
-           this.toast.success('OTP Verified')
+            this.snackBar.open('OTP Verified')
           this.router.navigateByUrl("/Login")
           } else if (this.successmessage == "OTP Expired!") {
             this.showresend == true;
             this.router.navigateByUrl("/ResendOTP");
           }
         } else {
-          this.toast.error(ver.message)
+          this.snackBar.open(ver.message)
         }
         this.spinner=false;
       });

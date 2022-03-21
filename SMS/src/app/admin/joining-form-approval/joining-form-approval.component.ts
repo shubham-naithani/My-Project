@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../admin.service';
@@ -14,7 +15,13 @@ export class JoiningFormApprovalComponent implements OnInit {
   item:any;
   message:any;
 
-  constructor(private fb: FormBuilder, private adminservice:AdminService, private route: Router, private toast: ToastrService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private adminservice:AdminService, 
+    private route: Router, 
+    private toast: ToastrService,
+    private snackBar:MatSnackBar
+    ) { }
 
   ngOnInit(){
     debugger
@@ -26,10 +33,10 @@ export class JoiningFormApprovalComponent implements OnInit {
     debugger
     this.adminservice.teacherGet().subscribe((Response:any)=>{
       if (Response.statusCode == 200) {
-        this.toast.success(Response.message);
+        this.snackBar.open(Response.message)
         this.data = Response.responseData;
       } else {
-        this.toast.error(Response.message);
+        this.snackBar.open(Response.message)
       }
     });
   }

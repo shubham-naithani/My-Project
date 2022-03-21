@@ -8,9 +8,8 @@
           <mat-label>ContactNo</mat-label>
           <input matInput placeholder="enter your contact no" formControlName="ContactNo">
           <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
         </mat-form-field><br>
-        <button type="submit">Resend</button>
+        <button type="submit" [disabled]="resendotpform.invalid">Resend</button>
         <app-progress-bar *ngIf="spinner" class="backgroundchange"></app-progress-bar>
       </form>
     </mat-card>

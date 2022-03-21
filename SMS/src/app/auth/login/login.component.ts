@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
@@ -16,22 +17,25 @@ export class LoginComponent implements OnInit {
   spinner: boolean = false;
   Role: any;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private toat: ToastrService, private route: Router) { }
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private toat: ToastrService, 
+    private route: Router,
+    private snackBar:MatSnackBar
+    ) { }
 
   ngOnInit() {
-    this.loginform = new FormGroup({
-      Email: new FormControl(''),
-      Password: new FormControl(''),
+    this.loginform = this.fb.group({
+      Email: ['',
+    [Validators.required,Validators.email]
+  ],
+      Password: ['',
+    [Validators.required,Validators.minLength(4),Validators.maxLength(8)]
+  ],
     })
     this.hide=true;
   }
-
-  // getErrorMessage() {
-  //   if (this.loginform.controls.Email.hasError('required')) {
-  //     return 'You must enter a value';
-  //   }
-  //   return this.loginform.controls.Email.hasError('Email') ? 'Not a valid email' : '';
-  // }
 
   get formcontrol() { return this.loginform.controls }
   submit() {
@@ -47,23 +51,23 @@ export class LoginComponent implements OnInit {
       }
       this.authService.login(data).subscribe((res: any) => {
         if (res.statusCode == 200) {
-          this.toat.success(res.message);
+          this.snackBar.open(res.message)
           localStorage.setItem("token", "Qnw56WdvUdwxbxwwU6930edwRjwduuVbwnmTU");debugger
           localStorage.setItem("Role", res.responseData);
           if (res.responseData === "student") {
             this.route.navigateByUrl("/student");
-            this.toat.success(res.message);
-
-          } else if (res.responseData === "teacher") {
+            this.snackBar.open(res.message)
+          }
+           else if (res.responseData === "teacher") {
             this.route.navigateByUrl("/teacher");
-            this.toat.success(res.message);
+            this.snackBar.open(res.message)
           }
           else if (res.responseData === "admin") {
             this.route.navigateByUrl("/admin");
-            this.toat.success(res.message);
+            this.snackBar.open(res.message)
           }
         } else {
-          this.toat.error(res.message);
+          this.snackBar.open(res.message)
         }
         this.spinner = false;
       });

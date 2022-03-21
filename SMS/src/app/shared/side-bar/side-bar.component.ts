@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 export class SideBarComponent implements OnInit {
  
   Role: any;
-  constructor(private route:Router) { }
+  constructor(
+    private route:Router
+    ) { }
 
   ngOnInit(): void {debugger
    this.Role =  localStorage.getItem('Role');
