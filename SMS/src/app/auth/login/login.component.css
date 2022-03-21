@@ -15,18 +15,16 @@
   }
   .login-box form{
     width: 100%;
-    margin-left: 2.5em;
+    margin-left: 1em;
     margin-top: 1em;
     margin-bottom: 3em; 
   }
   .login-box img{
     width: 100%;
-    /* z-index: -1; */
     height:732.4px;
   }
   button {
     cursor: pointer;
-    /* background: none; */
     border: 2px solid;  
     color:  #3f51b5;
     padding: 5px;
@@ -54,15 +52,13 @@
     color: #000;
   }
   mat-form-field {
-    width: 80%;
-    padding-top: 15px;
+    width: 90%;
     color: #000;
-    /* opacity:0.51; */
   }
   .example-card {
     position: absolute;
     bottom: 10em;
-    width: 350px;
+    width: 300px;
     margin-top: 10em;
     margin-left: 10em;
     padding: 20px 30px;
@@ -78,7 +74,6 @@
   }
   .backgroundchange {
     position: fixed;
-    /* filter: blur(8px); */
     top: 64px;
     left: 0;
     bottom: 0;
