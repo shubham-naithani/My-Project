@@ -86,9 +86,4 @@ namespace SchoolManagementSystem.Controllers
             return response;
         }
     }
-
-    
-
-
-
 }

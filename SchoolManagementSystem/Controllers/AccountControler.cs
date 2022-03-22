@@ -4,6 +4,7 @@ using SchoolManagementSystem.AccountModel;
 using SchoolManagementSystem.CommonServices;
 using SchoolManagementSystem.DAL.ContextFille;
 using SchoolManagementSystem.DAL.Tabels;
+using SchoolManagementSystem.Interfaces;
 using SchoolManagementSystem.Model;
 using System;
 using System.Linq;
@@ -12,7 +13,6 @@ using System.Security.Cryptography;
 using System.Text;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
-
 
 namespace SchoolManagementSystem.Controllers
 {
@@ -24,17 +24,16 @@ namespace SchoolManagementSystem.Controllers
         public SMSContext sms;
         public IConfiguration config;
         public SendOtp _otpSender;
-        public AccountControler(SMSContext smscon, IConfiguration configuration, SendOtp sendOtp)
+        private readonly ITokenService _tokenservice;
+        public AccountControler(SMSContext smscon, IConfiguration configuration, SendOtp sendOtp,ITokenService tokenservice)
         {
             sms = smscon;
             config = configuration;
             _otpSender = sendOtp;
+            _tokenservice = tokenservice;
         }
 
-
         //------------------------------------------        REGISTER HERE        --------------------------------------------- 
-
-
 
         [Route("Registeration")]
         [HttpPost]
@@ -95,8 +94,6 @@ namespace SchoolManagementSystem.Controllers
                         response.StatusCode = HttpStatusCode.BadRequest;
                     }
                 }
-
-
             }
             catch (Exception exp)
             {
@@ -106,10 +103,7 @@ namespace SchoolManagementSystem.Controllers
             return response;
         }
 
-
-
         //--------------------------------------------------           LOGIN          ------------------------------------------
-
 
         [Route("Login")]
         [HttpPost]
@@ -119,29 +113,31 @@ namespace SchoolManagementSystem.Controllers
             try
             {
                 var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false && x.Email == log.Email );
-
-                using var hmac = new HMACSHA512(data.PasswordSalt);
-                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(log.Password));
-
-                for (int i = 0; i < computedHash.Length; i++)
-                {
-                    if (computedHash[i] != data.PasswordHash[i])
-                    {
-                        response.Message = "Invalid Password";
-                    }
-                }
-
                 if (data != null)
                 {
-                    response.Message = "WELCOME" + data.FirstName;
-                    response.StatusCode = HttpStatusCode.OK;
-                    response.ResponseData = data.Role.ToLower();
+                    using var hmac = new HMACSHA512(data.PasswordSalt);
+                    var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(log.Password));
+                    for (int i = 0; i < computedHash.Length; i++)
+                    {
+                        if (computedHash[i] != data.PasswordHash[i])
+                        {
+                            response.Message = "Invalid Password";
+                            response.StatusCode = HttpStatusCode.BadRequest;
+                            return response;
+                        }
+                        else
+                        {
+                            response.Message = "WELCOME" + data.FirstName;
+                            response.StatusCode = HttpStatusCode.OK;
+                            response.token = _tokenservice.CreateToken(data);
+                        }                       
+                    }
                 }
                 else
                 {
-                    response.Message = "SORRY Username And Password are Incorrect";
+                    response.Message = "SORRY Username is Incorrect";
                     response.StatusCode = HttpStatusCode.BadRequest;
-                }
+                }          
             }
             catch (Exception exp)
             {
@@ -151,10 +147,7 @@ namespace SchoolManagementSystem.Controllers
             return response;
         }
 
-
-
-        //------------------------------------------------------          VERIFY OTP        ----------------------------------------
-
+        //------------------------------------------------------        VERIFY OTP       ----------------------------------------
 
         [Route("VerifyOTP")]
         [HttpPost]
@@ -164,7 +157,6 @@ namespace SchoolManagementSystem.Controllers
             try
             {
                 var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false && x.otp == otp.OTP);
-
 
                 if (data != null)
                 {
@@ -191,7 +183,7 @@ namespace SchoolManagementSystem.Controllers
                         if (min > 10)
                         {
                             string newOtp = "" + "";
-                            _otpSender.SendOTP(otp.ContactNo, newOtp);
+                            _ = _otpSender.SendOTP(otp.ContactNo, newOtp);
                             response.Message = "A OTP has been sent to your number";
                         }
                         {
@@ -215,12 +207,7 @@ namespace SchoolManagementSystem.Controllers
             return response;
         }
 
-
-
-        //---------------------------------------------              RESEND OTP            ----------------------------------
-
-
-
+        //---------------------------------------------           RESEND OTP          ----------------------------------
 
         [Route("ResendOTP")]
         [HttpPost]
@@ -269,11 +256,9 @@ namespace SchoolManagementSystem.Controllers
                 response.Message = exp.Message;
             }
             return response;
-        }
-     
+        }     
 
         //------------------------------------------------        FORGET PASSWORD         -----------------------------------
-
 
         [Route("Forget-Password")]
         [HttpPost]
@@ -303,10 +288,7 @@ namespace SchoolManagementSystem.Controllers
             return response;
         }
 
-
-
         //-------------------------------------------             RESET PASSWORD            ---------------------------------
-
 
         [Route("Reset-Password")]
         [HttpPost]
@@ -315,15 +297,13 @@ namespace SchoolManagementSystem.Controllers
             ApiResponse response = new ApiResponse();
             try
             {
-                var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false );
+                var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false && x.ContactNo == reset.ContactNo);
                 if (data != null)
                 {
                     using var hmac = new HMACSHA512();
-                    RegisterationTable reg = new RegisterationTable
-                    {
-                        PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(reset.Password)),
-                        PasswordSalt = hmac.Key,
-                    };                   
+                    data.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(reset.Password));
+                    data.PasswordSalt = hmac.Key;
+
                     sms.Registeration_tbl.Update(data);
                     int Issaved = sms.SaveChanges();
                     if (Issaved > 0)
@@ -334,7 +314,7 @@ namespace SchoolManagementSystem.Controllers
                 }
                 else
                 {
-                    response.Message = "Error";
+                    response.Message = "contact no is invalid";
                     response.StatusCode = HttpStatusCode.BadRequest;
                 }
             }
