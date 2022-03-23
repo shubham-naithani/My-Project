@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -22,9 +22,15 @@ export class RegisterationComponent implements OnInit {
     private toast: ToastrService,
     private router:Router,
     private snackBar:MatSnackBar
-    ) { }
+    ) { 
+      this.initForm();
+    }
 
   ngOnInit(){
+  
+  }
+
+  initForm() {
     this.registerform = this.fb.group({
       FirstName: ['',
     [Validators.required]
@@ -49,6 +55,28 @@ export class RegisterationComponent implements OnInit {
   ]
     })
     this.hide=true;
+  }
+
+   get FirstName(): AbstractControl {
+    return this.registerform.get('FirstName') as FormControl;
+  }
+  get LastName(): AbstractControl {
+    return this.registerform.get('LastName') as FormControl;
+  }
+  get Email(): AbstractControl {
+    return this.registerform.get('Email') as FormControl;
+  }
+  get Password(): AbstractControl {
+    return this.registerform.get('Password') as FormControl;
+  }
+  get DOB(): AbstractControl {
+    return this.registerform.get('DOB') as FormControl;
+  }
+  get ContactNo(): AbstractControl {
+    return this.registerform.get('ContactNo') as FormControl;
+  }
+  get Role(): AbstractControl {
+    return this.registerform.get('Role') as FormControl;
   }
 
   submit() {

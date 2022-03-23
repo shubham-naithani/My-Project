@@ -11,7 +11,6 @@ export class DashboardComponent implements OnInit {
   constructor(
     private route:Router
     ) { }
-  // Role:"student";
 
   ngOnInit(): void {
   }

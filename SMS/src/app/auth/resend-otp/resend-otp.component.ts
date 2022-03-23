@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
@@ -20,15 +20,26 @@ export class ResendOtpComponent implements OnInit {
     private authservice:AuthService,
     private toast:ToastrService,
     private snackBar:MatSnackBar
-    ) { }
+    ) { 
+      this.initForm();
+    }
 
   ngOnInit(){
+   
+  }
+
+  initForm() {
     this.resendotpform=this.res.group({
       ContactNo:['',
     [Validators.required,Validators.minLength(10)]
   ]
     })
   }
+
+  get ContactNo(): AbstractControl {
+    return this.resendotpform.get('ContactNo') as FormControl;
+  }
+
   get formcontrol(){return this.resendotpform.controls}
   submitForm(){
     if(this.resendotpform.invalid){

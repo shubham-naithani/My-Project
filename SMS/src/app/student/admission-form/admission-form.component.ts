@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -21,9 +21,15 @@ export class AdmissionFormComponent implements OnInit {
     private service: StudentService,
     private route: Router,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+    this.initForm();
+   }
 
   ngOnInit() {
+   
+  }
+
+  initForm() {
     this.admissionform = this.fb.group({
       FirstName: ['',
         [Validators.required]
@@ -72,6 +78,53 @@ export class AdmissionFormComponent implements OnInit {
       ],
     })
   }
+
+  get FirstName(): AbstractControl {
+    return this.admissionform.get('FirstName') as FormControl;
+  }
+  get LastName(): AbstractControl {
+    return this.admissionform.get('LastName') as FormControl;
+  }
+  get FathersName(): AbstractControl {
+    return this.admissionform.get('FathersName') as FormControl;
+  }
+  get DOB(): AbstractControl {
+    return this.admissionform.get('DOB') as FormControl;
+  }
+  get ADDRESS(): AbstractControl {
+    return this.admissionform.get('ADDRESS') as FormControl;
+  }
+  get Email(): AbstractControl {
+    return this.admissionform.get('Email') as FormControl;
+  }
+  get ContactNo(): AbstractControl {
+    return this.admissionform.get('ContactNo') as FormControl;
+  }
+  get Gender(): AbstractControl {
+    return this.admissionform.get('Gender') as FormControl;
+  }
+  get Cast(): AbstractControl {
+    return this.admissionform.get('Cast') as FormControl;
+  }
+  get Religion(): AbstractControl {
+    return this.admissionform.get('Religion') as FormControl;
+  }
+  get Nationality(): AbstractControl {
+    return this.admissionform.get('Nationality') as FormControl;
+  }
+  get City(): AbstractControl {
+    return this.admissionform.get('City') as FormControl;
+  }
+  get Pincode(): AbstractControl {
+    return this.admissionform.get('Pincode') as FormControl;
+  }
+  get State(): AbstractControl {
+    return this.admissionform.get('State') as FormControl;
+  }
+  get Class(): AbstractControl {
+    return this.admissionform.get('Class') as FormControl;
+  }
+
 
   submit() {
     let data = this.admissionform.value;

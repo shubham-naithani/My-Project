@@ -6,24 +6,44 @@
       <mat-label>FirstName</mat-label>
       <input matInput placeholder="enter your first name" formControlName="FirstName">
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-error *ngIf="FirstName.touched && !FirstName.valid">
+        <span>
+          FirstName is required
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
       <mat-label>LastName</mat-label>
       <input matInput placeholder="enter your last name" formControlName="LastName">
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-error *ngIf="LastName.touched && !LastName.valid">
+        <span>
+          LastName is required
+        </span>
+      </mat-error>
     </mat-form-field><br><br>
 
     <mat-form-field appearance="standard">
       <mat-label>FathersName</mat-label>
       <input matInput placeholder="enter your father's name" formControlName="FathersName">
       <mat-icon matSuffix>person_outline</mat-icon>
+      <mat-error *ngIf="FathersName.touched && !FathersName.valid">
+        <span>
+          FathersName is required
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
       <mat-label>ADDRESS</mat-label>
       <input matInput placeholder="enter your address" formControlName="ADDRESS">
       <mat-icon matSuffix>house</mat-icon>
+      <mat-error *ngIf="ADDRESS.touched && !ADDRESS.valid">
+        <span>
+          ADDRESS is required
+        </span>
+      </mat-error>
     </mat-form-field><br><br>
 
     <mat-form-field appearance="standard">
@@ -31,6 +51,16 @@
       <input matInput placeholder="pat@example.com" formControlName="Email" required>
       <mat-error *ngIf="admissionform.controls.Email.invalid"></mat-error>
       <mat-icon matSuffix>email</mat-icon>
+      <mat-error *ngIf="Email.touched && !Email.valid">
+        <span *ngIf="Email.errors?.required">
+          Email is required
+        </span>
+        <span
+          *ngIf="!Email.errors?.email"
+        >
+        Invalid Email
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
@@ -38,6 +68,14 @@
       <input matInput formControlName="ContactNo" required />
       <mat-icon matSuffix>phone</mat-icon>
       <mat-hint>Include area code</mat-hint>
+      <mat-error *ngIf="ContactNo.touched && !ContactNo.valid">
+        <span>
+          ContactNo is required
+        </span>
+        <span *ngIf="ContactNo.errors?.minlength">
+          ContactNo is invalid
+        </span>
+      </mat-error>
     </mat-form-field><br>
 
     <mat-form-field class="example-full-width" appearance="standard">
@@ -47,12 +85,22 @@
         <mat-icon matDatepickerToggleIcon>cake</mat-icon>
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="DOB.touched && !DOB.valid">
+        <span>
+          DOB is required
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
       <mat-label>Nationality</mat-label>
       <input matInput placeholder="enter your nationality" formControlName="Nationality">
       <mat-icon matSuffix>flag</mat-icon>
+      <mat-error *ngIf="Nationality.touched && !Nationality.valid">
+        <span>
+          Nationality is required
+        </span>
+      </mat-error>
     </mat-form-field><br>
 
     <mat-radio-group aria-label="Select an option" formControlName="Gender">
@@ -60,6 +108,11 @@
       <mat-radio-button value="Male">Male</mat-radio-button>
       <mat-radio-button value="Female">Female</mat-radio-button>
       <mat-radio-button value="Others">Others</mat-radio-button>
+      <mat-error *ngIf="Gender.touched && !Gender.valid">
+        <span>
+          Gender is required
+        </span>
+      </mat-error>
     </mat-radio-group><br>
 
     <mat-radio-group aria-label="Select an option" formControlName="Cast">
@@ -67,6 +120,11 @@
       <mat-radio-button value="General">General</mat-radio-button>
       <mat-radio-button value="SC/ST">SC/ST</mat-radio-button>
       <mat-radio-button value="OBC">OBC</mat-radio-button>
+      <mat-error *ngIf="Cast.touched && !Cast.valid">
+        <span>
+          Cast is required
+        </span>
+      </mat-error>
     </mat-radio-group><br>
 
     <mat-radio-group aria-label="Select an option" formControlName="Religion">
@@ -74,33 +132,58 @@
       <mat-radio-button value="Hindu">Hindu</mat-radio-button>
       <mat-radio-button value="Christian">Christian</mat-radio-button>
       <mat-radio-button value="Muslim">Muslim</mat-radio-button>
+      <mat-error *ngIf="Religion.touched && !Religion.valid">
+        <span>
+          Religion is required
+        </span>
+      </mat-error>
     </mat-radio-group><br><br>
 
     <mat-form-field appearance="standard">
       <mat-label>City</mat-label>
       <input matInput placeholder="enter your City" formControlName="City">
       <mat-icon matSuffix>place</mat-icon>
+      <mat-error *ngIf="City.touched && !City.valid">
+        <span>
+          City is required
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
       <mat-label>State</mat-label>
       <input matInput placeholder="enter your State" formControlName="State">
       <mat-icon matSuffix>place</mat-icon>
+      <mat-error *ngIf="State.touched && !State.valid">
+        <span>
+          State is required
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
       <mat-label>Pincode</mat-label>
       <input matInput placeholder="enter your Pincode" formControlName="Pincode">
       <mat-icon matSuffix>push_pin </mat-icon>
+      <mat-error *ngIf="Pincode.touched && !Pincode.valid">
+        <span>
+          Pincode is required
+        </span>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="standard">
       <mat-label>Class</mat-label>
       <input matInput placeholder="enter your class you want to take admission " formControlName="Class">
       <mat-icon matSuffix>menu_book</mat-icon>
+      <mat-error *ngIf="Class.touched && !Class.valid">
+        <span>
+          Class is required
+        </span>
+      </mat-error>
     </mat-form-field><br><br>
 
     <button mat-raised-button color="warn" type="reset">Reset</button>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="admissionform.invalid">Submit</button>
   </form>
 </div>

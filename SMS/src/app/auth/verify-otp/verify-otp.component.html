@@ -8,6 +8,11 @@
           <mat-label>Standard form field</mat-label>
           <input matInput placeholder="Placeholder" formControlName="OTP">
           <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-error *ngIf="OTP.touched && !OTP.valid">
+            <span>
+              OTP is required
+            </span>
+          </mat-error>
         </mat-form-field><br>
         <button type="submit" [disabled]="verifyotp.invalid">Verify</button>
         <div *ngIf="showresend">

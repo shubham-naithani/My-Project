@@ -12,8 +12,6 @@ export class TeacherDashboardComponent implements OnInit {
   constructor(
     private route:Router
     ) { }
-  // Role:"teacher";
-
   ngOnInit(): void {
   }
   logout(){

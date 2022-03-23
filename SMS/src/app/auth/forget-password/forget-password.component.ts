@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,21 +18,30 @@ export class ForgetPasswordComponent implements OnInit {
   enable:string="block";
   spinner:boolean=false;
 
-
   constructor(
     private fp:FormBuilder,
     private authservice:AuthService,
     private toast:ToastrService,
     private rout:Router,
     private snackBar:MatSnackBar
-    ) { }
+    ) {
+      this.initForm();
+     }
 
   ngOnInit(){
+  
+  }
+
+  initForm(){
     this.forgetpassword = this.fp.group({
       ContactNo:["",
     [Validators.required]
   ]
     });
+  }
+
+  get ContactNo(): AbstractControl {
+    return this.forgetpassword.get('ContactNo') as FormControl;
   }
 
   get formcontrol(){return this.forgetpassword.controls}

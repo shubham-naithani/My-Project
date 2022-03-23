@@ -9,7 +9,16 @@
         <mat-form-field appearance="standard">
           <mat-label>Enter your email</mat-label>
           <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com" formControlName="Email">
-           <mat-error>Valid email is <strong>required</strong></mat-error>
+          <mat-error *ngIf="Email.touched && !Email.valid">
+            <span *ngIf="Email.errors?.required">
+              Email is required
+            </span>
+            <span
+              *ngIf="!Email.errors?.email"
+            >
+            Invalid Email
+            </span>
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -21,6 +30,21 @@
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
+          <mat-error *ngIf="Password.touched && !Password.valid">
+            <span *ngIf="Password.errors?.required">
+              Password is required
+            </span>
+            <span
+              *ngIf="!Password.errors?.minlength"
+            >
+            Password min length 4
+            </span>
+            <span
+            *ngIf="!Password.errors?.maxLength"
+          >
+          Password max length 8
+          </span>
+          </mat-error>
         </mat-form-field>
       </div>
       <button type="submit" [disabled]="loginform.invalid">login</button>

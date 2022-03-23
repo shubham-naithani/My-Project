@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -19,9 +19,15 @@ export class JoiningFormComponent implements OnInit {
     private service:TeacherService,
     private route:Router,
     private snackBar:MatSnackBar
-    ) { }
+    ) {
+      this.initForm();
+     }
 
   ngOnInit(){
+
+  }
+
+  initForm() {
     this.joiningform = this.fb.group({
       FirstName: ['',
     [Validators.required]
@@ -63,6 +69,46 @@ export class JoiningFormComponent implements OnInit {
       [Validators.required]
       ],
     })
+  }
+
+  get FirstName(): AbstractControl {
+    return this.joiningform.get('FirstName') as FormControl;
+  }
+  get LastName(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get DOB(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get Age(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get Gender(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get Cast(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get Religion(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get Email(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get ContactNo(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get ADDRESS(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get Nationality(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get MaritialStatus(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
+  }
+  get Qualification(): AbstractControl {
+    return this.joiningform.get('LastName') as FormControl;
   }
 
   submit(){

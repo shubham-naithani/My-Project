@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -23,9 +23,15 @@ export class LoginComponent implements OnInit {
     private toat: ToastrService, 
     private route: Router,
     private snackBar:MatSnackBar
-    ) { }
+    ) { 
+      this.initForm();
+    }
 
   ngOnInit() {
+   
+  }
+
+  initForm() {
     this.loginform = this.fb.group({
       Email: ['',
     [Validators.required,Validators.email]
@@ -35,6 +41,14 @@ export class LoginComponent implements OnInit {
   ],
     })
     this.hide=true;
+  }
+
+  get Email(): AbstractControl {
+    return this.loginform.get('Email') as FormControl;
+  }
+  
+  get Password(): AbstractControl {
+    return this.loginform.get('Password') as FormControl;
   }
 
   get formcontrol() { return this.loginform.controls }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -24,9 +24,15 @@ export class VerifyOtpComponent implements OnInit {
     private toast:ToastrService,
     private router:Router,
     private snackBar:MatSnackBar
-    ) { }
+    ) { 
+      this.initForm();
+    }
 
   ngOnInit() {
+   
+  }
+
+  initForm() {
     this.verifyotp = this.otp.group({
       OTP:['',
     [Validators.required]
@@ -34,6 +40,11 @@ export class VerifyOtpComponent implements OnInit {
     })
     // this.Contact_No = this.route.snapshot.queryParamMap.get("Contact_No")
   }
+
+  get OTP(): AbstractControl {
+    return this.verifyotp.get('OTP') as FormControl;
+  }
+
   get formcontrol() {return this.verifyotp.controls}
 
   submitForm(){
