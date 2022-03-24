@@ -1,6 +1,6 @@
 <div class="main-body">
   <form id=joiningform [formGroup]="joiningform" (submit)="submit()">
-    <h2 style="margin-left:28.5em;margin-top: 1em;margin-bottom: 2em;">Joining Form</h2>
+    <h2 style="margin-left:25em;margin-top: 1em;margin-bottom: 2em;">Joining Form</h2>
 
     <mat-form-field appearance="standard">
       <mat-label>FirstName</mat-label>
@@ -58,10 +58,8 @@
         <span *ngIf="Email.errors?.required">
           Email is required
         </span>
-        <span
-          *ngIf="!Email.errors?.email"
-        >
-        Invalid Email
+        <span *ngIf="Email.errors?.pattern">
+          Invalid Email
         </span>
       </mat-error>
     </mat-form-field>
@@ -71,11 +69,6 @@
       <mat-radio-button value="Male">Male</mat-radio-button>
       <mat-radio-button value="Female">Female</mat-radio-button>
       <mat-radio-button value="Others">Others</mat-radio-button>
-      <mat-error *ngIf="Gender.touched && !Gender.valid">
-        <span>
-          Gender is required
-        </span>
-      </mat-error>
     </mat-radio-group><br>
 
     <mat-form-field appearance="standard">
@@ -84,8 +77,11 @@
       <mat-icon matSuffix>phone</mat-icon>
       <mat-hint>Include area code</mat-hint>
       <mat-error *ngIf="ContactNo.touched && !ContactNo.valid">
-        <span>
+        <span *ngIf="ContactNo.errors?.required">
           ContactNo is required
+        </span>
+        <span *ngIf="ContactNo.errors?.pattern">
+          ContactNo is invalid
         </span>
       </mat-error>
     </mat-form-field>
@@ -95,11 +91,6 @@
       <mat-radio-button value="General">General</mat-radio-button>
       <mat-radio-button value="SC/ST">SC/ST</mat-radio-button>
       <mat-radio-button value="OBC">OBC</mat-radio-button>
-      <mat-error *ngIf="Cast.touched && !Cast.valid">
-        <span>
-          Cast is required
-        </span>
-      </mat-error>
     </mat-radio-group><br>
 
     <mat-form-field appearance="standard">
@@ -118,11 +109,6 @@
       <mat-radio-button value="Hindu">Hindu</mat-radio-button>
       <mat-radio-button value="Christian">Christian</mat-radio-button>
       <mat-radio-button value="Muslim">Muslim</mat-radio-button>
-      <mat-error *ngIf="Religion.touched && !Religion.valid">
-        <span>
-          Religion is required
-        </span>
-      </mat-error>
     </mat-radio-group><br>
 
     <mat-form-field appearance="standard">
@@ -138,7 +124,10 @@
 
     <mat-form-field appearance="standard">
       <mat-label>MaritialStatus</mat-label>
-      <input matInput placeholder="enter your Maritial_Status" formControlName="MaritialStatus">
+      <mat-select formControlName="MaritialStatus">
+        <mat-option value="married">Married</mat-option>
+        <mat-option value="unmarried">Unmarried</mat-option>
+      </mat-select>
       <mat-icon matSuffix>sentiment_neutral</mat-icon>
       <mat-error *ngIf="MaritialStatus.touched && !MaritialStatus.valid">
         <span>
@@ -169,7 +158,7 @@
       </mat-error>
     </mat-form-field><br>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="standard">
       <mat-label>Experience of teaching</mat-label>
       <mat-select formControlName="ExperienceOfTeaching">
         <mat-option value="Fresher">Fresher</mat-option>
@@ -185,6 +174,6 @@
     </mat-form-field>
 
     <button mat-raised-button color="warn" type="reset">Reset</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="joiningform.invalid">Submit</button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
   </form>
 </div>

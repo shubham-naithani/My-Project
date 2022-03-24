@@ -1,6 +1,6 @@
 <div class="main-body">
   <form id=admission [formGroup]="admissionform" (submit)="submit()">
-    <h2 style="margin-left:28em;margin-top: 1em;margin-bottom: 1em;">Admission Form</h2>
+    <h2 style="margin-left:24.5em;margin-top: 1em;margin-bottom: 1em;">Admission Form</h2>
 
     <mat-form-field appearance="standard">
       <mat-label>FirstName</mat-label>
@@ -55,10 +55,8 @@
         <span *ngIf="Email.errors?.required">
           Email is required
         </span>
-        <span
-          *ngIf="!Email.errors?.email"
-        >
-        Invalid Email
+        <span *ngIf="Email.errors?.pattern">
+          Invalid Email
         </span>
       </mat-error>
     </mat-form-field>
@@ -69,10 +67,10 @@
       <mat-icon matSuffix>phone</mat-icon>
       <mat-hint>Include area code</mat-hint>
       <mat-error *ngIf="ContactNo.touched && !ContactNo.valid">
-        <span>
+        <span *ngIf="ContactNo.errors?.required">
           ContactNo is required
         </span>
-        <span *ngIf="ContactNo.errors?.minlength">
+        <span *ngIf="ContactNo.errors?.pattern">
           ContactNo is invalid
         </span>
       </mat-error>
@@ -108,11 +106,6 @@
       <mat-radio-button value="Male">Male</mat-radio-button>
       <mat-radio-button value="Female">Female</mat-radio-button>
       <mat-radio-button value="Others">Others</mat-radio-button>
-      <mat-error *ngIf="Gender.touched && !Gender.valid">
-        <span>
-          Gender is required
-        </span>
-      </mat-error>
     </mat-radio-group><br>
 
     <mat-radio-group aria-label="Select an option" formControlName="Cast">
@@ -120,11 +113,6 @@
       <mat-radio-button value="General">General</mat-radio-button>
       <mat-radio-button value="SC/ST">SC/ST</mat-radio-button>
       <mat-radio-button value="OBC">OBC</mat-radio-button>
-      <mat-error *ngIf="Cast.touched && !Cast.valid">
-        <span>
-          Cast is required
-        </span>
-      </mat-error>
     </mat-radio-group><br>
 
     <mat-radio-group aria-label="Select an option" formControlName="Religion">
@@ -132,11 +120,6 @@
       <mat-radio-button value="Hindu">Hindu</mat-radio-button>
       <mat-radio-button value="Christian">Christian</mat-radio-button>
       <mat-radio-button value="Muslim">Muslim</mat-radio-button>
-      <mat-error *ngIf="Religion.touched && !Religion.valid">
-        <span>
-          Religion is required
-        </span>
-      </mat-error>
     </mat-radio-group><br><br>
 
     <mat-form-field appearance="standard">
@@ -184,6 +167,6 @@
     </mat-form-field><br><br>
 
     <button mat-raised-button color="warn" type="reset">Reset</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="admissionform.invalid">Submit</button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
   </form>
 </div>

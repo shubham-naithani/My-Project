@@ -1,0 +1,13 @@
+<div>
+    <div class="main-container">
+        <div class="content-container">
+            <mat-icon id="close-btn" (click)="closeDialog()">close</mat-icon>
+            <h1>Logout</h1>
+            <span class="content-span"><h3>Do you want to logout {{userName}} ?</h3></span>
+        </div>
+        <div class="btn">
+            <button color="white" mat-flat-button id="yes" [mat-dialog-close]="true">Yes</button>
+            <button color="warn" mat-raised-button id="no" [mat-dialog-close]="false">No</button>
+        </div>        
+    </div>
+</div>

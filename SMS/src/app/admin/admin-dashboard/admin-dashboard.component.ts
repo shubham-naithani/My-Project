@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DialogService } from 'src/app/shared/dialog.service';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,19 +9,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
+  userName:any
+  constructor
+    (
+      private route: Router,
+      private dialogService: DialogService
+    ) {
+  }
 
-  constructor(private route:Router) { }
-  // Role:"admin";
   ngOnInit(): void {
-    this.getAdmin();
-  }
-  logout(){
-    localStorage.clear();
-    this.route.navigateByUrl("/Login");
+   this.userName = localStorage.getItem('userName')
   }
 
-  getAdmin(){
-    // this.role=res.responseData.role;
+  logout() {
+    this.dialogService.openConfirmDialog()
+      .afterClosed().subscribe(res => {
+        if (res) {
+          localStorage.clear();
+          this.route.navigateByUrl('/Login')
+        }
+      })
   }
-
 }

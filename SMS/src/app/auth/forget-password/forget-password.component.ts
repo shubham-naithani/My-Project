@@ -35,8 +35,7 @@ export class ForgetPasswordComponent implements OnInit {
   initForm(){
     this.forgetpassword = this.fp.group({
       ContactNo:["",
-    [Validators.required]
-  ]
+      Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
     });
   }
 
@@ -46,10 +45,9 @@ export class ForgetPasswordComponent implements OnInit {
 
   get formcontrol(){return this.forgetpassword.controls}
   submitform(){
-    if(this.forgetpassword.invalid){
-      return;
-    }
+    this.forgetpassword.markAllAsTouched();
     this.spinner=true;
+    if(this.forgetpassword.valid){
      let data=this.forgetpassword.value
      this.authservice.forgetpassword(data).subscribe((forget: any)=>{      
        if(forget.statusCode==200){
@@ -65,8 +63,8 @@ export class ForgetPasswordComponent implements OnInit {
         this.snackBar.open(forget.messages)
        }
      })
+    }
      this.spinner=false;
-
   }
   
 

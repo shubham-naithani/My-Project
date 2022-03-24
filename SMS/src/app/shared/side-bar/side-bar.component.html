@@ -1,53 +1,53 @@
-<div class="profile-info" *ngIf="Role == 'admin'">
+<div class="profile-info" *ngIf="role == 'admin'">
     <div class="admin-image">
     <img src="../../../../assets/images/key.png">
     </div>
-    <p>admin : SHUBHAM</p>
+    <p>admin : {{userName}}</p>
 </div>
 
-<div class="profile-info" *ngIf="Role == 'student'">
+<div class="profile-info" *ngIf="role == 'Student'">
     <div class="user-image">
-        <img style="margin-left:4.6em;" src="../../../../src/assets/images/unnamed.png">
+        <img style="margin-left:4.6em;" src="../../../assets/images/girl in red.jpg">
     </div>
-    <p>student : name</p>
+    <p>student : {{userName}}</p>
 </div>
 
-<div class="profile-info" *ngIf="Role == 'teacher'">    
+<div class="profile-info" *ngIf="role == 'Teacher'">    
     <div class="user-image">
         <img src="../../../../assets/images/teacher.png">
     </div>
-    <p>Teacher : name</p>
+    <p>Teacher : {{userName}}</p>
 </div>
 
 <mat-nav-list>
     <!-- ----------------------------------------ADMIN-------------------------------------------------------->
-    <div *ngIf="Role == 'admin'">
-     <a mat-list-item [routerLink]="['/teacher-joining-form-approval']">joining form approval</a>
-     <a mat-list-item [routerLink]="['/admin-student']">students</a>
-     <a mat-list-item [routerLink]="['/admin-teacher']">teachers</a>
-     <a mat-list-item [routerLink]="['/admin-class']" >classes</a>
-     <a mat-list-item [routerLink]="['/admin-result']">result</a>
-     <a mat-list-item [routerLink]="['/admin-salary']">teacher's - salary</a>
-     <a mat-list-item [routerLink]="['/admin-fee-structure']">fee - structure</a>
+    <div *ngIf="role == 'admin'">
+     <a mat-list-item [routerLink]="['/joining-form-approval']">joining form approval</a>
+     <a mat-list-item [routerLink]="['/student']">students</a>
+     <a mat-list-item [routerLink]="['/teacher']">teachers</a>
+     <a mat-list-item [routerLink]="['/class']" >classes</a>
+     <a mat-list-item [routerLink]="['/result']">result</a>
+     <a mat-list-item [routerLink]="['/salary']">teacher's - salary</a>
+     <a mat-list-item [routerLink]="['/fee-structure']">fee - structure</a>
     </div>
     <!-- ----------------------------------------STUDENT---------------------------------------------------->
-    <div *ngIf="Role == 'student'">
-    <a mat-list-item [routerLink]="['/student-home']">Home</a>
-    <a mat-list-item [routerLink]="['/student-Admission_form']">Admission Form</a>
-    <a mat-list-item [routerLink]="['/student-profile']">Profile</a>
-    <a mat-list-item [routerLink]="['/student-subject']">Subjects</a>
-    <a mat-list-item [routerLink]="['/student-upcoming-events']">Upcoming events</a>
-    <a mat-list-item [routerLink]="['/student-my-assignment']">my assignments</a>
-    <a mat-list-item [routerLink]="['/student-time-table']">Time Table</a>
-    <a mat-list-item [routerLink]="['/student-result']">result</a>
+    <div *ngIf="role == 'Student'">
+    <a mat-list-item [routerLink]="['/home']">Home</a>
+    <a mat-list-item [routerLink]="['/Admission_form']">Admission Form</a>
+    <a mat-list-item [routerLink]="['/profile']">Profile</a>
+    <a mat-list-item [routerLink]="['/subject']">Subjects</a>
+    <a mat-list-item [routerLink]="['/upcoming-events']">Upcoming events</a>
+    <a mat-list-item [routerLink]="['/my-assignment']">my assignments</a>
+    <a mat-list-item [routerLink]="['/time-table']">Time Table</a>
+    <a mat-list-item [routerLink]="['/result']">result</a>
     </div>
 
     <!-- ----------------------------------------TEACHER-------------------------------------------------->
 
-    <div *ngIf="Role == 'teacher'">
-    <a mat-list-item [routerLink]="['/teacher-home']">Home</a>
-    <a mat-list-item [routerLink]="['/teacher-joining-form']">Joining Form</a>
-    <a mat-list-item [routerLink]="['/teacher-profile']">Profile</a>
-    <a mat-list-item [routerLink]="['/teacher-time-table']">Time Table</a>
+    <div *ngIf="role == 'Teacher'">
+    <a mat-list-item [routerLink]="['/home']">Home</a>
+    <a mat-list-item [routerLink]="['/joining-form']">Joining Form</a>
+    <a mat-list-item [routerLink]="['/profile']">Profile</a>
+    <a mat-list-item [routerLink]="['/time-table']">Time Table</a>
     </div>
 </mat-nav-list>

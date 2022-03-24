@@ -24,13 +24,10 @@ export class JoiningFormApprovalComponent implements OnInit {
     ) { }
 
   ngOnInit(){
-    debugger
     this.teacherGet();
-
   }
 
   teacherGet(){
-    debugger
     this.adminservice.teacherGet().subscribe((Response:any)=>{
       if (Response.statusCode == 200) {
         this.snackBar.open(Response.message)

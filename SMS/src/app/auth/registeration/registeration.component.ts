@@ -48,7 +48,7 @@ export class RegisterationComponent implements OnInit {
     [Validators.required]
   ],
       ContactNo: ['',
-    [Validators.required,Validators.minLength(10)]
+    [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
   ],
       Role:['',
     [Validators.required]
@@ -80,21 +80,20 @@ export class RegisterationComponent implements OnInit {
   }
 
   submit() {
-    debugger
-    if(this.registerform.invalid){
-      return;
-    }
+    this.registerform.markAllAsTouched();
+    if(this.registerform.valid){
     this.spinner=true;
     let data = this.registerform.value;
     this.service.registeration(data).subscribe((res: any) => {
-      if(res.statusCode==200){
+      if(res.statusCode == 200){ 
         this.snackBar.open(res.message)
         this.router.navigateByUrl("/VerifyOTP");
        }else{
         this.snackBar.open(res.message)
+        this.route.navigateByUrl('/Login')
        }
      })
+    }
      this.spinner=false;
-
   }
 }

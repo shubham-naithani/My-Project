@@ -13,6 +13,7 @@ import { TeacherModule } from './teacher/teacher.module';
 import { CommonModule } from '@angular/common';
 import { StudentModule } from './student/student.module';
 import { AdminModule } from './admin/admin.module';
+import { LogoutDialogComponent } from './shared/logout-dialog/logout-dialog.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AdminModule } from './admin/admin.module';
     
   ], 
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[LogoutDialogComponent]
 })
 export class AppModule { }

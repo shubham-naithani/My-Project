@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-// @Input() Role:string;
   constructor(
     private route:Router
     ) { }
 
   ngOnInit(): void {
-    debugger
   }
   home(){
     this.route.navigateByUrl("")
@@ -28,7 +26,5 @@ export class TopBarComponent implements OnInit {
   }
 
 }
-function input() {
-  throw new Error('Function not implemented.');
-}
+
 

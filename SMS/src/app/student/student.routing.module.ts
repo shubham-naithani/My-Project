@@ -15,14 +15,14 @@ import { AdmissionFormComponent } from './admission-form/admission-form.componen
 const routes: Routes = [
 
   {path:"",component:DashboardComponent,canActivate:[AuthGuardGuard],children:[
-    {path:"student-home",component:HomeComponent},
-    {path:"student-profile",component:ProfileComponent},
-    {path:"student-subject",component:SubjectsComponent},
-    {path:"student-upcoming-events",component:UpcomingEventsComponent},
-    {path:"student-my-assignment",component:MyAssignmentComponent},
-    {path:"student-result",component:ResultComponent},
-    {path:"student-time-table",component:TimeTableComponent},
-    {path:"student-Admission_form",component:AdmissionFormComponent}
+    {path:"home",component:HomeComponent},
+    {path:"profile",component:ProfileComponent},
+    {path:"subject",component:SubjectsComponent},
+    {path:"upcoming-events",component:UpcomingEventsComponent},
+    {path:"my-assignment",component:MyAssignmentComponent},
+    {path:"result",component:ResultComponent},
+    {path:"time-table",component:TimeTableComponent},
+    {path:"Admission_form",component:AdmissionFormComponent}
   ]}
 ];
 

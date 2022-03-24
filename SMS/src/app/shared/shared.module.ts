@@ -4,13 +4,15 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import {MaterialModule} from '../material/material.module';
-import {RouterModule} from '@angular/router'
+import {RouterModule} from '@angular/router';
+import { LogoutDialogComponent } from './logout-dialog/logout-dialog.component'
 
 @NgModule({
   declarations: [
     SideBarComponent,
     TopBarComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    LogoutDialogComponent
   ],
   imports: [
     CommonModule,

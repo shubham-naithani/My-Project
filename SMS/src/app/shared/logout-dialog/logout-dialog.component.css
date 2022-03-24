@@ -1,0 +1,14 @@
+*{
+    user-select: none;
+}
+mat-icon{
+    float: right;
+    cursor: pointer;
+}
+.main-container h1{
+    font-size: 30px;
+}
+button{
+    width: 145px;
+    margin-left: 1.5%;
+}

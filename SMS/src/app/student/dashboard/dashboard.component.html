@@ -7,10 +7,10 @@
 
     <mat-sidenav-content>
         <mat-toolbar>
-            <button (click)="sidenav.toggle()" mat-icon-button class="material-icon-outlined"><mat-icon>menu</mat-icon></button> 
+            <button (click)="sidenav.toggle()" mat-icon-button class="material-icon-outlined" matTooltip="menu"><mat-icon>menu</mat-icon></button> 
             <span class="example-fill-remaining-space"></span>
-            <span style="font-family: sans-serif;" class="student-text">WELCOME : STUDENT</span>
-            <button mat-button class="material-icon-outlined" (click)="logout()"><mat-icon>logout</mat-icon></button>
+            <span style="font-family: sans-serif;" class="student-text">WELCOME : {{userName}}</span>
+            <button mat-button class="material-icon-outlined" matTooltip="logout" (click)="logout()"><mat-icon>logout</mat-icon></button>
         </mat-toolbar>
         <div class="main-count">
             <router-outlet></router-outlet>

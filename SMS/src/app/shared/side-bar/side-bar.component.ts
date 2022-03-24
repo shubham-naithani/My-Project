@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
- 
-  Role: any;
+   role: any;
+   userName:any
   constructor(
     private route:Router
     ) { }
 
-  ngOnInit(): void {debugger
-   this.Role =  localStorage.getItem('Role');
+  ngOnInit(): void {
+   this.role = localStorage.getItem('userRole')
+   this.userName = localStorage.getItem('userName')
   } 
 }

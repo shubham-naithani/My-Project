@@ -12,13 +12,13 @@ import { JoiningFormApprovalComponent } from './joining-form-approval/joining-fo
 
 const routes: Routes = [
   {path:"",component:AdminDashboardComponent,canActivate:[AuthGuardGuard],children:[
-  {path:"admin-class",component:ClassComponent},
-  {path:"admin-fee-structure",component:FeeStructureComponent},
-  {path:"admin-result",component:ResultComponent},
-  {path:"admin-student",component:StudentsComponent},
-  {path:"admin-teacher",component:TeachersComponent},
-  {path:"admin-salary",component:TeacherSalaryComponent},
-  {path:"teacher-joining-form-approval",component:JoiningFormApprovalComponent}
+  {path:"class",component:ClassComponent},
+  {path:"fee-structure",component:FeeStructureComponent},
+  {path:"result",component:ResultComponent},
+  {path:"student",component:StudentsComponent},
+  {path:"teacher",component:TeachersComponent},
+  {path:"salary",component:TeacherSalaryComponent},
+  {path:"joining-form-approval",component:JoiningFormApprovalComponent}
   ]}
 ];
 

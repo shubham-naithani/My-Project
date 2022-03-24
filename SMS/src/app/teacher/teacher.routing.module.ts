@@ -11,9 +11,9 @@ import { JoiningFormComponent } from './joining-form/joining-form.component';
 const routes: Routes = [
  {path:"",component:TeacherDashboardComponent,canActivate:[AuthGuardGuard],children:[
    {path:"",component:ThomeComponent},
-   {path:"teacher-joining-form",component:JoiningFormComponent},
-   {path:"teacher-profile",component:TprofileComponent},
-   {path:"teacher-time-table",component:TimeTableComponent}
+   {path:"joining-form",component:JoiningFormComponent},
+   {path:"profile",component:TprofileComponent},
+   {path:"time-table",component:TimeTableComponent}
  ]}
 ];
 

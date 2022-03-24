@@ -16,47 +16,43 @@ export class LoginComponent implements OnInit {
   hide: boolean;
   spinner: boolean = false;
   Role: any;
+  tokenData:any
 
   constructor(
-    private fb: FormBuilder, 
-    private authService: AuthService, 
-    private toat: ToastrService, 
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private toat: ToastrService,
     private route: Router,
-    private snackBar:MatSnackBar
-    ) { 
-      this.initForm();
-    }
+    private snackBar: MatSnackBar
+  ) {
+    this.initForm();
+  }
 
   ngOnInit() {
-   
+
   }
 
   initForm() {
     this.loginform = this.fb.group({
       Email: ['',
-    [Validators.required,Validators.email]
-  ],
+        [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]
+      ],
       Password: ['',
-    [Validators.required,Validators.minLength(4),Validators.maxLength(8)]
-  ],
+        [Validators.required, Validators.minLength(4), Validators.maxLength(8)]
+      ],
     })
-    this.hide=true;
+    this.hide = true;
   }
 
   get Email(): AbstractControl {
     return this.loginform.get('Email') as FormControl;
   }
-  
   get Password(): AbstractControl {
     return this.loginform.get('Password') as FormControl;
   }
 
-  get formcontrol() { return this.loginform.controls }
-  submit() {
-    debugger
-    if(this.loginform.invalid){
-      return;
-    }
+  onSubmit() {
+    this.loginform.markAllAsTouched();
     this.spinner = true;
     if (this.loginform.valid) {
       let data = {
@@ -64,20 +60,26 @@ export class LoginComponent implements OnInit {
         Password: this.loginform.value.Password
       }
       this.authService.login(data).subscribe((res: any) => {
+        this.authService.tokenDecoder(res.token); 
+        const tokenData = JSON.parse(localStorage.getItem('token')|| '{}');
+         
+        var name = tokenData.Name
+        var role = tokenData.Role
+        localStorage.setItem('userName',name)
+        localStorage.setItem('userRole',role)
+
         if (res.statusCode == 200) {
           this.snackBar.open(res.message)
-          localStorage.setItem("token", "Qnw56WdvUdwxbxwwU6930edwRjwduuVbwnmTU");debugger
-          localStorage.setItem("Role", res.responseData);
-          if (res.responseData === "student") {
-            this.route.navigateByUrl("/student");
+          if (role == 'Student') {
+            this.route.navigateByUrl('/student');
             this.snackBar.open(res.message)
           }
-           else if (res.responseData === "teacher") {
-            this.route.navigateByUrl("/teacher");
+          else if (role == 'Teacher') {
+            this.route.navigateByUrl('/teacher');
             this.snackBar.open(res.message)
           }
-          else if (res.responseData === "admin") {
-            this.route.navigateByUrl("/admin");
+          else if (role == 'admin') {
+            this.route.navigateByUrl('/admin');
             this.snackBar.open(res.message)
           }
         } else {
@@ -85,6 +87,6 @@ export class LoginComponent implements OnInit {
         }
         this.spinner = false;
       });
-    }
+    } 
   }
 };

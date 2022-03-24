@@ -7,7 +7,7 @@
 
       <mat-form-field appearance="standard">
         <mat-label>FirstName</mat-label>
-        <input matInput placeholder="enter first name" formControlName="FirstName">
+        <input matInput placeholder="enter first name" formControlName="FirstName" required>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-error *ngIf="FirstName.touched && !FirstName.valid">
           <span>
@@ -18,7 +18,7 @@
 
       <mat-form-field appearance="standard">
         <mat-label>LastName</mat-label>
-        <input matInput placeholder="enter last name" formControlName="LastName">
+        <input matInput placeholder="enter last name" formControlName="LastName" required>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-error *ngIf="LastName.touched && !LastName.valid">
           <span>
@@ -29,14 +29,14 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
-        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com" formControlName="Email">
+        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com" formControlName="Email" required>
         <mat-icon style="display: flex;" matSuffix>email</mat-icon>
         <mat-error *ngIf="Email.touched && !Email.valid">
           <span *ngIf="Email.errors?.required">
             Email is required
           </span>
           <span
-            *ngIf="!Email.errors?.email"
+            *ngIf="Email.errors?.pattern"
           >
           Invalid Email
           </span>
@@ -46,7 +46,7 @@
       <div class="example-container">
         <mat-form-field appearance="standard">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'Password' : 'text'" formControlName="Password">
+          <input matInput [type]="hide ? 'Password' : 'text'" formControlName="Password" minlength="4" maxlength="8" autocomplete="off" required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -56,22 +56,22 @@
               Password is required
             </span>
             <span
-              *ngIf="!Password.errors?.minlength"
+              *ngIf="Password.errors?.minlength"
             >
-            Password min length 4
+            min 4 characters required
             </span>
             <span
-            *ngIf="!Password.errors?.maxLength"
+            *ngIf="Password.errors?.maxLength"
           >
-          Password max length 8
+          max 8 characters required
           </span>
           </mat-error>
         </mat-form-field>
       </div>
 
-      <mat-form-field class="example-full-width" appearance="standard">
+      <mat-form-field class="example-full-width" appearance="standard"> 
         <mat-label>Select DOB</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="DOB">
+        <input matInput [matDatepicker]="picker" formControlName="DOB" required>
         <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon>cake</mat-icon>
         </mat-datepicker-toggle>
@@ -84,32 +84,32 @@
       </mat-form-field><br>
 
       <mat-form-field appearance="standard">
-        <mat-label>ContactNo</mat-label>
-        <input matInput placeholder="enter your mobile no" formControlName="ContactNo">
+        <mat-label>ContactNo +91 Included</mat-label>
+        <input matInput placeholder="enter your mobile no" formControlName="ContactNo" required>
         <mat-icon matSuffix>phone</mat-icon>
         <mat-error *ngIf="ContactNo.touched && !ContactNo.valid">
-          <span>
+          <span *ngIf="ContactNo.errors?.required">
             ContactNo is required
           </span>
-          <span *ngIf="ContactNo.errors?.minlength">
+          <span *ngIf="ContactNo.errors?.pattern">
             ContactNo is invalid
           </span>
         </mat-error>
       </mat-form-field><br><br>
 
       <label>Your Role</label>
-      <mat-radio-group aria-label="Role" formControlName="Role">
+      <mat-radio-group aria-label="Role" formControlName="Role" required>
         <mat-radio-button value="Student">Student</mat-radio-button>
         <mat-radio-button value="Teacher">Teacher</mat-radio-button>
-        <mat-error *ngIf="Role.touched && !Role.valid">
-          <span>
-            Role is required
+        <mat-error *ngIf="Role.touched && !Role.valid" style="margin-left: 9%;">
+          <span *ngIf="Role.errors?.required">
+            Your role is required
           </span>
         </mat-error>
-      </mat-radio-group><br><br><br>
+      </mat-radio-group><br><br>
 
-      <button style="float: left;" mat-raised-button color="primary" type="reset">Reset</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="registerform.invalid">Submit</button>
+      <button style="float: left;" mat-flat-button type="reset">Reset</button>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
       <app-progress-bar *ngIf="spinner" class="backgroundchange"></app-progress-bar>
     </form>
   </mat-card>

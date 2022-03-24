@@ -15,7 +15,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const materialcomponents = [
   MatMenuModule,
@@ -33,7 +34,9 @@ const materialcomponents = [
   MatCardModule,
   MatRadioModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDialogModule,
+  MatTooltipModule
 ]
 
 @NgModule({
