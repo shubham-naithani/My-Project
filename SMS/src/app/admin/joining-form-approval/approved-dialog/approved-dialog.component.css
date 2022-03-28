@@ -1,0 +1,13 @@
+mat-select {
+    width: 50%;
+}
+mat-icon{
+    float: right;
+}
+.btn{
+    width: 100%;
+    margin-left: 1%;
+}
+.btn button{
+    margin-left: 2%;
+}

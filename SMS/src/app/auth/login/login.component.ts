@@ -53,12 +53,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.loginform.markAllAsTouched();
-    this.spinner = true;
     if (this.loginform.valid) {
       let data = {
         Email: this.loginform.value.Email,
         Password: this.loginform.value.Password
       }
+      this.spinner = true;
       this.authService.login(data).subscribe((res: any) => {
         this.authService.tokenDecoder(res.token); 
         const tokenData = JSON.parse(localStorage.getItem('token')|| '{}');
@@ -72,20 +72,27 @@ export class LoginComponent implements OnInit {
           this.snackBar.open(res.message)
           if (role == 'Student') {
             this.route.navigateByUrl('/student');
-            this.snackBar.open(res.message)
+            this.snackBar.open(res.message,'Undo', {
+              duration:3000
+            })
           }
           else if (role == 'Teacher') {
             this.route.navigateByUrl('/teacher');
-            this.snackBar.open(res.message)
+            this.snackBar.open(res.message , 'Undo' ,{
+              duration:3000
+            })
           }
           else if (role == 'admin') {
             this.route.navigateByUrl('/admin');
-            this.snackBar.open(res.message)
+            this.snackBar.open(res.message, 'Undo' ,{
+              duration:3000
+            })
           }
         } else {
           this.snackBar.open(res.message)
         }
         this.spinner = false;
+        
       });
     } 
   }

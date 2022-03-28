@@ -8,8 +8,7 @@
       <div class="example-container">
         <mat-form-field appearance="standard">
           <mat-label>Enter your email</mat-label>
-          <input matInput placeholder="pat@example.com"
-            formControlName="Email" autocomplete="off" required>
+          <input matInput placeholder="pat@example.com" formControlName="Email" autocomplete="off" required>
           <mat-error *ngIf="Email.touched && !Email.valid">
             <span *ngIf="Email.errors?.required">
               Email is required
@@ -24,7 +23,8 @@
       <div class="example-container">
         <mat-form-field appearance="standard">
           <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password" minlength="4" maxlength="8" autocomplete="off" required>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password" minlength="4" maxlength="8"
+            autocomplete="off" required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

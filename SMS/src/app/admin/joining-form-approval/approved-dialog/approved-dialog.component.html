@@ -1,0 +1,33 @@
+<div>
+    <form [formGroup]="approvedForm">
+        <div>
+            <div>
+                <mat-icon [mat-dialog-close]="true">close</mat-icon>
+            </div><br>
+            <div>
+                <mat-form-field>
+                    <mat-label>Classes You Will Teach</mat-label>
+                    <mat-select matInput formControlName="ClassesYouWillTeach" multiple>
+                        <mat-option *ngFor="let class1 of classes" [value]="class1.value">
+                            {{class1.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Periods You Will Teach</mat-label>
+                    <mat-select matInput formControlName="YourPeriods" multiple>
+                        <mat-option *ngFor="let period of periods" [value]="period.value">
+                            {{period.value}}
+                        </mat-option>
+                    </mat-select><br><br>
+                </mat-form-field>
+            </div>
+
+            <div class="btn">
+                <button mat-flat-button type="reset">reset</button>
+                <button mat-raised-button color="primary" (click)="submit()">submit</button>
+            </div>
+        </div>
+    </form>
+</div>

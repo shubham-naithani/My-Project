@@ -19,7 +19,7 @@ mat-form-field{
     height: 500;
     width: 350px;
     position: absolute;
-    top: 4em;
+    top: 5.5em;
     margin-left: 10em;
   }
   .example-card h1{
@@ -32,15 +32,11 @@ mat-form-field{
   }
   button{
     width: 100px;
-    margin: 0 1em;
-    margin-left: 3em;
-  
+    margin: 1em 0em;
+    margin-left: 3em;  
   }
   .mat-radio-button  {
     margin-left: 1em;
-  }
-  mat-radio-group{
-    margin-top: 2em;
   }
   label{
     margin-left: 2em;

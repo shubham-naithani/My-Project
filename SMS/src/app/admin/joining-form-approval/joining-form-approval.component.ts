@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DialogService } from 'src/app/shared/dialog.service';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -20,21 +21,11 @@ export class JoiningFormApprovalComponent implements OnInit {
     private adminservice:AdminService, 
     private route: Router, 
     private toast: ToastrService,
-    private snackBar:MatSnackBar
-    ) { }
+    private snackBar:MatSnackBar,
+    private dialog:DialogService
+    ) { 
+    }
 
   ngOnInit(){
-    this.teacherGet();
-  }
-
-  teacherGet(){
-    this.adminservice.teacherGet().subscribe((Response:any)=>{
-      if (Response.statusCode == 200) {
-        this.snackBar.open(Response.message)
-        this.data = Response.responseData;
-      } else {
-        this.snackBar.open(Response.message)
-      }
-    });
   }
 }

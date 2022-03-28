@@ -1,42 +1,21 @@
-<div class="mainbody">
-    <div class="right-box">
-        <table>
-            <tr>
-                <th>FullName</th>
-                <th>Email</th>
-                <th>ContactNo</th>
-                <th>DOB</th>
-                <th>Qualification</th>
-                <th>SubjectsYouCanTeach</th>
-                <th>ExperienceOfTeaching</th>
-                <th style="color: green;font-size: x-large;">Approved</th>       
-                <th>ClassesYouWillTeach</th>
-                <th>YourPeriods</th>               
-            </tr>
-            <tr *ngFor="let item of Data" >
-                <td>{{item.FullName}}</td>
-                <td>{{item.Email}}</td>
-                <td>{{item.ContactNo}}</td>
-                <td>{{item.DOB}}</td>
-                <td>{{item.Qualification}}</td>
-                <td>{{item.SubjectsYouCanTeach}}</td>
-                <td>{{item.ExperienceOfTeaching}}</td>
-                <td>{{item.Approved}}</td>
-                <input type="text">
-             <!-- <td><button (click)="editForm2(item)"><img src="../../../assets/images/edit.png" style="width: 20px;height: 20px;"></button></td> -->
-               <!-- <td><button (click)="deletestudent(item.Student_ID)"><img src="../../../assets/images/trash.png" style="width: 20px;height: 20px;"></button></td> -->
-            </tr>
-        </table>
-    </div>
+<div class="main-container">
+<mat-tab-group selectedTabChange>
+    <mat-tab label="Pending Requests">
+        <app-pending-request></app-pending-request>
+    </mat-tab>
+    <mat-tab label="Approved Requests">
+        <app-approved-request></app-approved-request>
+    </mat-tab>
+    <mat-tab label="Rejected Requests">
+        <app-rejected-request></app-rejected-request>
+    </mat-tab>
+</mat-tab-group>
+
+<div class="footer">
+    <mat-paginator [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page">
+</mat-paginator>
 </div>
-
-
-
-
-
-
-
-
-
-
-
+</div>

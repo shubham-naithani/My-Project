@@ -8,7 +8,11 @@ mat-icon{
 .main-container h1{
     font-size: 30px;
 }
+.btn{
+    width: 100% !important;
+    display: flex;
+}
 button{
-    width: 145px;
-    margin-left: 1.5%;
+    width: 130px;
+    margin-left: 2%;
 }

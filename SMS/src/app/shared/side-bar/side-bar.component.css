@@ -5,6 +5,9 @@
     margin-top: 5em;
     border-radius: 50%;
 }
+.admin-image img{
+    filter: invert(1)
+}
 .profile-info p{
     text-align: center;
     margin-top: 1em;

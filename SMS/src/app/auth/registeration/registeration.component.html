@@ -29,16 +29,15 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
-        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com" formControlName="Email" required>
+        <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" matInput placeholder="pat@example.com"
+          formControlName="Email" required>
         <mat-icon style="display: flex;" matSuffix>email</mat-icon>
         <mat-error *ngIf="Email.touched && !Email.valid">
           <span *ngIf="Email.errors?.required">
             Email is required
           </span>
-          <span
-            *ngIf="Email.errors?.pattern"
-          >
-          Invalid Email
+          <span *ngIf="Email.errors?.pattern">
+            Invalid Email
           </span>
         </mat-error>
       </mat-form-field><br>
@@ -46,7 +45,8 @@
       <div class="example-container">
         <mat-form-field appearance="standard">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'Password' : 'text'" formControlName="Password" minlength="4" maxlength="8" autocomplete="off" required>
+          <input matInput [type]="hide ? 'Password' : 'text'" formControlName="Password" minlength="4" maxlength="8"
+            autocomplete="off" required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -55,21 +55,17 @@
             <span *ngIf="Password.errors?.required">
               Password is required
             </span>
-            <span
-              *ngIf="Password.errors?.minlength"
-            >
-            min 4 characters required
+            <span *ngIf="Password.errors?.minlength">
+              min 4 characters required
             </span>
-            <span
-            *ngIf="Password.errors?.maxLength"
-          >
-          max 8 characters required
-          </span>
+            <span *ngIf="Password.errors?.maxLength">
+              max 8 characters required
+            </span>
           </mat-error>
         </mat-form-field>
       </div>
 
-      <mat-form-field class="example-full-width" appearance="standard"> 
+      <mat-form-field class="example-full-width" appearance="standard">
         <mat-label>Select DOB</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="DOB" required>
         <mat-datepicker-toggle matSuffix [for]="picker">
@@ -106,7 +102,7 @@
             Your role is required
           </span>
         </mat-error>
-      </mat-radio-group><br><br>
+      </mat-radio-group>
 
       <button style="float: left;" mat-flat-button type="reset">Reset</button>
       <button mat-raised-button color="primary" type="submit">Submit</button>
