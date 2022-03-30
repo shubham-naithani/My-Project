@@ -36,7 +36,7 @@ namespace SchoolManagementSystem.Controllers
             ApiResponse response = new ApiResponse();
             try
             {
-                var data = sms.Teacher_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false);
+                var data = sms.Teacher_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false &&x.ContactNo == joiningform.ContactNo);
 
                 if (data != null)
                 {
