@@ -3,8 +3,8 @@
         <div>
             <div>
                 <mat-icon [mat-dialog-close]="true">close</mat-icon>
-            </div><br>
-            <div>
+            </div><br><br>
+            <div class="form-fields">
                 <mat-form-field>
                     <mat-label>Classes You Will Teach</mat-label>
                     <mat-select matInput formControlName="ClassesYouWillTeach" multiple>
@@ -12,8 +12,14 @@
                             {{class1.value}}
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="ClassesYouWillTeach.touched && !ClassesYouWillTeach.valid">
+                        <span *ngIf="ClassesYouWillTeach.errors?.required">
+                            This field is required
+                        </span>
+                    </mat-error>
                 </mat-form-field>
-
+            </div>
+            <div>
                 <mat-form-field>
                     <mat-label>Periods You Will Teach</mat-label>
                     <mat-select matInput formControlName="YourPeriods" multiple>
@@ -21,9 +27,13 @@
                             {{period.value}}
                         </mat-option>
                     </mat-select><br><br>
+                    <mat-error *ngIf="YourPeriods.touched && !YourPeriods.valid">
+                        <span *ngIf="YourPeriods.errors?.required">
+                            This field is required
+                        </span>
+                    </mat-error>
                 </mat-form-field>
             </div>
-
             <div class="btn">
                 <button mat-flat-button type="reset">reset</button>
                 <button mat-raised-button color="primary" (click)="submit()">submit</button>

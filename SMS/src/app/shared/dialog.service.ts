@@ -25,7 +25,7 @@ export class DialogService {
   openApprovedDialog() {
     this.dialog.open(ApprovedDialogComponent,{
       width: '450px',
-      height: '210px',
+      height: '270px',
       disableClose: true,
     })
   }

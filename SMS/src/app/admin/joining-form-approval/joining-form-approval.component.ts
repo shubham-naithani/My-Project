@@ -28,4 +28,5 @@ export class JoiningFormApprovalComponent implements OnInit {
 
   ngOnInit(){
   }
+ 
 }

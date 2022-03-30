@@ -10,8 +10,18 @@ export class AdminService {
 
   constructor(private http:HttpClient) { }
 
-  teacherGet():Observable<any>{debugger
+  getPendingFormRequests():Observable<any>{
     let url = 'http://localhost:65468/adminAdmin/'
-    return this.http.get<any>(url + "pending_form_requests");
+    return this.http.get<any>(url + "get_pending_form_requests");
+  }
+
+  deleteJoiningForm(id:any) {debugger
+    let url = 'http://localhost:65468/adminAdmin/'
+    return this.http.delete<any>(url + "delete_joining-form/{id}");
+  }
+
+  getDeleteRequest():Observable<any>{
+    let url = 'http://localhost:65468/adminAdmin/'
+    return this.http.get<any>(url + "get_deleteted_joining-form")
   }
 }

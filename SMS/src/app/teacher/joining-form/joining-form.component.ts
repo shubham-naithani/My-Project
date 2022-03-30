@@ -129,9 +129,13 @@ export class JoiningFormComponent implements OnInit {
       let data = this.joiningform.value;
       this.service.Joiningform(data).subscribe((res: any) => {
         if (res.statusCode == 200) {
-          this.snackBar.open(res.message)
+          this.snackBar.open(res.message,'undo',{
+            duration:3000
+          })
         } else {
-          this.snackBar.open(res.message)
+          this.snackBar.open(res.message,'undo',{
+            duration:3000
+          })
         }
       })
     }

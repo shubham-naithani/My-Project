@@ -3,32 +3,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { AdminService } from '../../admin.service';
 
-export interface PeriodicElement {
-  position: number;
-  name: string;
-  Email:string;
-  Nationality:string;
-  MaritialStatus:string;
-  Qualification:string;
-  SubjectsYouCanTeach:string;
-  ExperienceOfTeaching:string;
-  ClassesYouWillTeach:string;
-  YourPeriods:string
-  Approved:string
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 0, 
-    name: '',
-    Email:'',
-    Nationality:'',
-    MaritialStatus:'',
-    Qualification:'',
-    SubjectsYouCanTeach:'',
-    ExperienceOfTeaching:'',
-    ClassesYouWillTeach:'',
-    YourPeriods:'',
-    Approved:''
+export interface PendingRequests {
+  id: number;
+  firstName: string;
+  email: string;
+  nationality: string;
+  maritialStatus: string;
+  qualification: string;
+  subjectsYouCanTeach: string;
+  experienceOfTeaching: string;
+  ClassesYouWillTeach: string;
+  YourPeriods: string
+  Approved: string
+}let ELEMENT_DATA: PendingRequests[] = [
+  {
+    id: 0,
+    firstName: '',
+    email: '',
+    nationality: '',
+    maritialStatus: '',
+    qualification: '',
+    subjectsYouCanTeach: '',
+    experienceOfTeaching: '',
+    ClassesYouWillTeach: '',
+    YourPeriods: '',
+    Approved: ''
   },
 ];
 
@@ -38,48 +37,67 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./pending-request.component.css']
 })
 export class PendingRequestComponent implements OnInit {
-  data:any
+  data: any
+  id: any;
   displayedColumns: string[] = [
-    'position', 
-    'name', 
-    'Email', 
-    'Nationality',
-    'MaritialStatus',
-    'Qualification',
-    'SubjectsYouCanTeach',
-    'ExperienceOfTeaching',
+    'id',
+    'firstName',
+    'email',
+    'nationality',
+    'maritialStatus',
+    'qualification',
+    'subjectsYouCanTeach',
+    'experienceOfTeaching',
     'ClassesYouWillTeach',
     'YourPeriods',
     'Approved'
   ];
-  dataSource = ELEMENT_DATA;
+  dataSource = [];
 
   constructor
-  (
-    private adminservice:AdminService,
-    private snackBar:MatSnackBar,
-    private dialogService:DialogService
-  ) 
-  {
-    this.getPendingRequests()
+    (
+      private adminservice: AdminService,
+      private snackBar: MatSnackBar,
+      private dialogService: DialogService
+    ) {
+    this.getPendingRequests();
   }
 
   ngOnInit(): void {
   }
-
-  getPendingRequests(){
-    this.adminservice.teacherGet().subscribe((Response:any)=>{
-      if (Response.statusCode == 200) {
-        this.snackBar.open(Response.message)
-        this.dataSource = Response.responseData;
-      } else {
-        this.snackBar.open(Response.message)
-      }
-      console.log(this.dataSource)
-    });
-  }
-
+  
   openApprovedDialog() {
     this.dialogService.openApprovedDialog()
   }
+
+  getPendingRequests() {
+    this.adminservice.getPendingFormRequests().subscribe((res: any) => {
+      if (res.statusCode == 200) {
+        this.snackBar.open(res.message, 'undo', {
+          duration: 3000
+        })
+        this.dataSource = res.responseData;
+      } else {
+        this.snackBar.open(res.message, 'undo', {
+          duration: 3000
+        })
+      }
+    });
+  }
+
+  deleteRequest(id: any) {
+    this.adminservice.deleteJoiningForm(id).subscribe((res: any) => {
+      if (res.statusCode == 200) {
+        this.snackBar.open(res.message, 'undo', {
+          duration: 3000
+        })
+        this.dataSource = res.responseData;
+      } else {
+        this.snackBar.open(res.message, 'undo', {
+          duration: 3000
+        })
+      }
+    })
+  }
+
 }

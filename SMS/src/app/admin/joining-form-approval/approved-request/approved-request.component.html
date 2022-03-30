@@ -1,43 +1,60 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Email">
+    <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Nationality">
+    <ng-container matColumnDef="nationality">
         <th mat-header-cell *matHeaderCellDef> Nationality </th>
-        <td mat-cell *matCellDef="let element"> {{element.Nationality}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.nationality}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="MaritialStatus">
+    <ng-container matColumnDef="maritialStatus">
         <th mat-header-cell *matHeaderCellDef> MaritialStatus </th>
-        <td mat-cell *matCellDef="let element"> {{element.MaritialStatus}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.maritialStatus}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Qualification">
+    <ng-container matColumnDef="qualification">
         <th mat-header-cell *matHeaderCellDef> Qualification </th>
-        <td mat-cell *matCellDef="let element"> {{element.Qualification}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.qualification}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="SubjectsYouCanTeach">
+    <ng-container matColumnDef="subjectsYouCanTeach">
         <th mat-header-cell *matHeaderCellDef> SubjectsYouCanTeach </th>
-        <td mat-cell *matCellDef="let element"> {{element.SubjectsYouCanTeach}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.subjectsYouCanTeach}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="ExperienceOfTeaching">
+    <ng-container matColumnDef="experienceOfTeaching">
         <th mat-header-cell *matHeaderCellDef> ExperienceOfTeaching </th>
-        <td mat-cell *matCellDef="let element"> {{element.ExperienceOfTeaching}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.experienceOfTeaching}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ClassesYouWillTeach">
+        <th mat-header-cell *matHeaderCellDef> ClassesYouWillTeach </th>
+        <td mat-cell *matCellDef="let element"> {{element.ClassesYouWillTeach}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="YourPeriods">
+        <th mat-header-cell *matHeaderCellDef> YourPeriods </th>
+        <td mat-cell *matCellDef="let element"> {{element.YourPeriods}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Approved">
+        <th mat-header-cell *matHeaderCellDef> Approved </th>
+        <td mat-cell *matCellDef="let element"> 
+            <mat-icon>done</mat-icon>        
+        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

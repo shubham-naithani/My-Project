@@ -1,25 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface PeriodicElement {
-  position: number;
-  name: string;
-  Email:string;
-  Nationality:string;
-  MaritialStatus:string;
-  Qualification:string;
-  SubjectsYouCanTeach:string;
-  ExperienceOfTeaching:string;
+export interface ApprovedRequests {
+  id: number;
+  firstName: string;
+  email:string;
+  nationality:string;
+  maritialStatus:string;
+  qualification:string;
+  subjectsYouCanTeach:string;
+  experienceOfTeaching:string;
+  ClassesYouWillTeach:string;
+  YourPeriods:string;
+  Approved:string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 0, 
-    name: '',
-    Email:'shubham@gmail.com',
-    Nationality:'',
-    MaritialStatus:'',
-    Qualification:'',
-    SubjectsYouCanTeach:'',
-    ExperienceOfTeaching:''
+let ELEMENT_DATA: ApprovedRequests[] = [
+  {
+    id: 0, 
+    firstName: '',
+    email:'',
+    nationality:'',
+    maritialStatus:'',
+    qualification:'',
+    subjectsYouCanTeach:'',
+    experienceOfTeaching:'',
+    ClassesYouWillTeach:'',
+    YourPeriods:'',
+    Approved:''
   },
 ];
 
@@ -31,16 +38,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ApprovedRequestComponent implements OnInit {
   data:any
   displayedColumns: string[] = [
-    'position', 
-    'name', 
-    'Email', 
-    'Nationality',
-    'MaritialStatus',
-    'Qualification',
-    'SubjectsYouCanTeach',
-    'ExperienceOfTeaching'
+    'id', 
+    'firstName', 
+    'email', 
+    'nationality',
+    'maritialStatus',
+    'qualification',
+    'subjectsYouCanTeach',
+    'experienceOfTeaching',
+    'ClassesYouWillTeach',
+    'YourPeriods',
+    'Approved'
   ];
-  dataSource = ELEMENT_DATA;
+  dataSource = [];
 
   constructor() { }
 
