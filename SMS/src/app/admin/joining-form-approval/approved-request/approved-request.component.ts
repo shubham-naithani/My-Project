@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminService } from '../../admin.service';
 
 export interface ApprovedRequests {
   id: number;
@@ -9,8 +11,8 @@ export interface ApprovedRequests {
   qualification:string;
   subjectsYouCanTeach:string;
   experienceOfTeaching:string;
-  ClassesYouWillTeach:string;
-  YourPeriods:string;
+  classesYouWillTeach:string;
+  yourPeriods:string;
   Approved:string;
 }
 
@@ -24,8 +26,8 @@ let ELEMENT_DATA: ApprovedRequests[] = [
     qualification:'',
     subjectsYouCanTeach:'',
     experienceOfTeaching:'',
-    ClassesYouWillTeach:'',
-    YourPeriods:'',
+    classesYouWillTeach:'',
+    yourPeriods:'',
     Approved:''
   },
 ];
@@ -46,15 +48,37 @@ export class ApprovedRequestComponent implements OnInit {
     'qualification',
     'subjectsYouCanTeach',
     'experienceOfTeaching',
-    'ClassesYouWillTeach',
-    'YourPeriods',
+    'classesYouWillTeach',
+    'yourPeriods',
     'Approved'
   ];
   dataSource = [];
 
-  constructor() { }
+  constructor
+  (
+    private adminservice: AdminService,
+    private snackBar: MatSnackBar,
+  )
+   { 
+     this.getApprovedRequests();
+   }
 
   ngOnInit(): void {
   }
 
+  getApprovedRequests() {
+    this.adminservice.getApprovedRequests().subscribe((res:any) => {
+      if (res.statusCode == 200) {
+        this.snackBar.open(res.message,'undo',{
+          duration:3000
+        })
+        this.dataSource = res.responseData;
+        console.log('approved',this.dataSource)
+      } else {
+        this.snackBar.open(res.message,'undo',{
+          duration:3000
+        })
+      }
+    })
+  }
 }

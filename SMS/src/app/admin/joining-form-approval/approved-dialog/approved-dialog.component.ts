@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogService } from 'src/app/shared/dialog.service';
+import { AdminService } from '../../admin.service';
+import { PendingRequestComponent } from '../pending-request/pending-request.component';
 
 interface class1 {
   value: string;
@@ -42,8 +47,13 @@ export class ApprovedDialogComponent implements OnInit {
   ];
   constructor
     (
-      private fb: FormBuilder
-    ) {
+      private fb: FormBuilder,
+      private adminservice: AdminService,
+      private snackBar: MatSnackBar,
+      private dialogSer: DialogService,
+      private dialog: MatDialog,
+
+  ) {
     this.initForm();
   }
 
@@ -69,9 +79,23 @@ export class ApprovedDialogComponent implements OnInit {
   }
 
   submit() {
-    this.approvedForm.markAllAsTouched();
-    if (this.approvedForm.valid) {
-      console.log(this.approvedForm.value)
+    debugger
+    let Data = {
+      ClassesYouWillTeach: this.approvedForm.value.ClassesYouWillTeach.join(),
+      YourPeriods: this.approvedForm.value.YourPeriods.join()
     }
+    this.adminservice.postPendingForm(Data).subscribe((res: any) => {
+      if (res.statusCode == 200) {
+        this.snackBar.open(res.message, 'undo', {
+          duration: 3000
+        })
+        this.dialog.closeAll();
+        this.adminservice.getPendingFormRequests();
+      } else {
+        this.snackBar.open(res.message, 'undo', {
+          duration: 3000
+        })
+      }
+    });
   }
 }

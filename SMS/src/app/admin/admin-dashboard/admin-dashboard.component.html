@@ -9,11 +9,10 @@
         <mat-toolbar>
             <button (click)="sidenav.toggle()" mat-icon-button class="material-icon-outlined" matTooltip="menu"><mat-icon>menu</mat-icon></button> 
             <span class="example-fill-remaining-space"></span>
-            <span style="font-family: sans-serif;" class="admin-text">ADMIN : {{userName}}</span>
+            <span class="admin-text"><h3>ADMIN : {{userName}}</h3></span>
             <button mat-button class="material-icon-outlined" matTooltip="logout" (click)="logout()"><mat-icon>logout</mat-icon></button>
         </mat-toolbar>
         <div class="main-count">
-            <!-- <img src="../../../assets/images/bluebg.jpg"> -->
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

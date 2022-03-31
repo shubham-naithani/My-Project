@@ -10,18 +10,30 @@ export class AdminService {
 
   constructor(private http:HttpClient) { }
 
-  getPendingFormRequests():Observable<any>{
+  getPendingFormRequests():Observable<any> {
     let url = 'http://localhost:65468/adminAdmin/'
     return this.http.get<any>(url + "get_pending_form_requests");
   }
 
-  deleteJoiningForm(id:any) {debugger
+  getDeleteRequest():Observable<any> {
+    let url = 'http://localhost:65468/adminAdmin/'
+    return this.http.get<any>(url + "get_deleteted_joining-form")
+  }
+
+  getApprovedRequests():Observable<any> {
+    let url = 'http://localhost:65468/adminAdmin/'
+    return this.http.get<any>(url + "get_approved_requests")
+  }
+
+  postPendingForm(Data : any) :Observable<any> {
+    let url = 'http://localhost:65468/adminAdmin/'
+    return this.http.post<any>(url + "post_approved_requests" ,Data)
+  }
+
+  deleteJoiningForm(id : any):Observable<any> {
     let url = 'http://localhost:65468/adminAdmin/'
     return this.http.delete<any>(url + "delete_joining-form/{id}");
   }
 
-  getDeleteRequest():Observable<any>{
-    let url = 'http://localhost:65468/adminAdmin/'
-    return this.http.get<any>(url + "get_deleteted_joining-form")
-  }
+
 }

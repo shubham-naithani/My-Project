@@ -11,7 +11,7 @@ export interface RejectedRequests {
   qualification: string;
   subjectsYouCanTeach: string;
   experienceOfTeaching: string;
-  Canceled: string;
+  Canceled: string
 }
 
 let ELEMENT_DATA: RejectedRequests[] = [
@@ -24,7 +24,7 @@ let ELEMENT_DATA: RejectedRequests[] = [
     qualification: '',
     subjectsYouCanTeach: '',
     experienceOfTeaching: '',
-    Canceled: ''
+    Canceled:''
   },
 ];
 
@@ -35,6 +35,7 @@ let ELEMENT_DATA: RejectedRequests[] = [
 })
 export class RejectedRequestComponent implements OnInit {
   data: any
+  id: any;
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -46,7 +47,7 @@ export class RejectedRequestComponent implements OnInit {
     'experienceOfTeaching',
     'Canceled'
   ];
-  dataSource : any;
+  dataSource = [];
 
   constructor
     (
@@ -67,12 +68,12 @@ export class RejectedRequestComponent implements OnInit {
           duration:3000
         })
         this.dataSource = res.responseData;
+        console.log('rejected ',this.dataSource)
       } else {
         this.snackBar.open(res.message,'undo',{
           duration:3000
         })
       }
-      console.log(this.dataSource)
     })
   }
 

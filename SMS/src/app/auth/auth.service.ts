@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
   providedIn: 'root'
 })
 export class AuthService {
-  
+
   baseUrl = "http://localhost:65468/api/AccountControler/";
   constructor(private http: HttpClient) { }
 
@@ -31,11 +31,12 @@ export class AuthService {
   }
   tokenDecoder(token: any) {
     try {
-      var decodeData:any = jwt_decode(token);
-      var tokenData = {Role:decodeData.Role , Name: decodeData.Name}  
-      localStorage.setItem('token',JSON.stringify(tokenData));
+      var decodeData: any = jwt_decode(token);
+      var tokenData = { Role: decodeData.Role, Name: decodeData.Name }
+      localStorage.setItem('token', JSON.stringify(tokenData));
     }
     catch (Error) {
       return token;
-    }}
+    }
+  }
 }

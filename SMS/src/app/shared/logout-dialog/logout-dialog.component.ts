@@ -8,6 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class LogoutDialogComponent implements OnInit {
   userName:any
+
   constructor
     (
       public dialogRef: MatDialogRef<LogoutDialogComponent>

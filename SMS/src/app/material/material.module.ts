@@ -20,7 +20,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import {MatBadgeModule} from '@angular/material/badge';
 const materialcomponents = [
   MatMenuModule,
   MatToolbarModule,
@@ -42,7 +42,8 @@ const materialcomponents = [
   MatTooltipModule,
   MatTabsModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatBadgeModule
 ]
 
 @NgModule({

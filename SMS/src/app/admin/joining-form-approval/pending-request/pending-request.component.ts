@@ -12,10 +12,11 @@ export interface PendingRequests {
   qualification: string;
   subjectsYouCanTeach: string;
   experienceOfTeaching: string;
-  ClassesYouWillTeach: string;
-  YourPeriods: string
+  classesYouWillTeach: string;
+  yourPeriods: string
   Approved: string
-}let ELEMENT_DATA: PendingRequests[] = [
+}
+let ELEMENT_DATA: PendingRequests[] = [
   {
     id: 0,
     firstName: '',
@@ -25,8 +26,8 @@ export interface PendingRequests {
     qualification: '',
     subjectsYouCanTeach: '',
     experienceOfTeaching: '',
-    ClassesYouWillTeach: '',
-    YourPeriods: '',
+    classesYouWillTeach: '',
+    yourPeriods: '',
     Approved: ''
   },
 ];
@@ -48,8 +49,8 @@ export class PendingRequestComponent implements OnInit {
     'qualification',
     'subjectsYouCanTeach',
     'experienceOfTeaching',
-    'ClassesYouWillTeach',
-    'YourPeriods',
+    'classesYouWillTeach',
+    'yourPeriods',
     'Approved'
   ];
   dataSource = [];
@@ -59,7 +60,8 @@ export class PendingRequestComponent implements OnInit {
       private adminservice: AdminService,
       private snackBar: MatSnackBar,
       private dialogService: DialogService
-    ) {
+    ) 
+    {
     this.getPendingRequests();
   }
 
@@ -77,6 +79,7 @@ export class PendingRequestComponent implements OnInit {
           duration: 3000
         })
         this.dataSource = res.responseData;
+        console.log('pending',this.dataSource)
       } else {
         this.snackBar.open(res.message, 'undo', {
           duration: 3000
@@ -85,19 +88,22 @@ export class PendingRequestComponent implements OnInit {
     });
   }
 
-  deleteRequest(id: any) {
-    this.adminservice.deleteJoiningForm(id).subscribe((res: any) => {
-      if (res.statusCode == 200) {
-        this.snackBar.open(res.message, 'undo', {
-          duration: 3000
-        })
-        this.dataSource = res.responseData;
-      } else {
-        this.snackBar.open(res.message, 'undo', {
-          duration: 3000
-        })
-      }
-    })
+  deleteRequest(id: any) {    
+    if(confirm('Do you want to delete this joining form request') == true){
+      this.adminservice.deleteJoiningForm(id).subscribe((res: any) => {
+        if (res.statusCode == 200) {
+          this.snackBar.open(res.message, 'undo', {
+            duration: 3000
+          })
+          this.dataSource = res.responseData;
+          this.getPendingRequests();
+        } else {
+          this.snackBar.open(res.message, 'undo', {
+            duration: 3000
+          })
+        }
+      })
+    } 
   }
 
 }

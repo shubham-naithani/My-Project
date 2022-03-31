@@ -1,5 +1,5 @@
 <div class="main-container">
-<mat-tab-group selectedTabChange>
+<mat-tab-group #tabRef (selectedTabChange)="tabChanger(tabRef.selectedIndex)">
     <mat-tab label="Pending Requests">
         <app-pending-request></app-pending-request>
     </mat-tab>
