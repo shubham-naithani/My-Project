@@ -7,37 +7,37 @@ namespace SchoolManagementSystem.DAL.Tabels
         //--------------------------------------- TEACHER JOINING FORM ------------------------------------------
 
         [Key]
-        public int ID { get; set; }
+        public int? ID { get; set; }
         [Required]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
         [Required]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
         [Required]
-        public string DOB { get; set; }
+        public string? DOB { get; set; }
         [Required]
-        public string Age { get; set; }
+        public string? Age { get; set; }
         [Required]
-        public string Gender { get; set; }
+        public string? Gender { get; set; }
         [Required]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         [Required]
-        public string ContactNo { get; set; }
+        public string? ContactNo { get; set; }
         [Required]
-        public string ADDRESS { get; set; }
+        public string? ADDRESS { get; set; }
         [Required]
-        public string Cast { get; set; }
+        public string? Cast { get; set; }
         [Required]
-        public string Religion { get; set; }
+        public string? Religion { get; set; }
         [Required]
-        public string Nationality { get; set; }
+        public string? Nationality { get; set; }
         [Required]
-        public string MaritialStatus { get; set; }
+        public string? MaritialStatus { get; set; }
         [Required]
-        public string Qualification { get; set; }
+        public string? Qualification { get; set; }
         [Required]
-        public string SubjectsYouCanTeach { get; set; }
+        public string? SubjectsYouCanTeach { get; set; }
         [Required]
-        public string ExperienceOfTeaching { get; set; }
+        public string? ExperienceOfTeaching { get; set; }
 
 
         //---------------------------------------          FOR ADMIN USE ONLY         --------------------------------------------
