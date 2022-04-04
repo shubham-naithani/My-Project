@@ -14,11 +14,11 @@ export class SideBarComponent implements OnInit {
   hidden = true;
   formsCount: any;
   count = 0;
-  constructor(
-    private route: Router,
-    private dialogSer: DialogService,
+  constructor
+  (
     private adminSer: AdminService
-  ) {
+  ) 
+  {
     this.toggleBadgeVisibility();
   }
 
@@ -28,8 +28,7 @@ export class SideBarComponent implements OnInit {
     this.formsCount = localStorage.getItem('formsCount')
   }
 
-  toggleBadgeVisibility() {
-    debugger
+  toggleBadgeVisibility():any {
     this.hidden = false
     this.adminSer.getPendingFormRequests().subscribe((res: any) => {
       if (res.responseData != null) {
@@ -39,10 +38,12 @@ export class SideBarComponent implements OnInit {
         if (this.count >= 1) {
           this.hidden = true
         } 
-        this.count++
+        this.count = this.count  +1
+        return 0
       } else {
         this.hidden = true
       }
+      return 0
     })
   }
 }
