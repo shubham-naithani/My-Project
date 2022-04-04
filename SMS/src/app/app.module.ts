@@ -15,6 +15,7 @@ import { StudentModule } from './student/student.module';
 import { AdminModule } from './admin/admin.module';
 import { LogoutDialogComponent } from './shared/logout-dialog/logout-dialog.component';
 import { ApprovedDialogComponent } from './admin/joining-form-approval/approved-dialog/approved-dialog.component';
+import { AdminService } from './admin/admin.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { ApprovedDialogComponent } from './admin/joining-form-approval/approved-
     StudentModule,
     AdminModule,
   ], 
-  providers: [],
+  providers: [AdminService],
   bootstrap: [AppComponent],
   entryComponents:[LogoutDialogComponent,ApprovedDialogComponent]
 })

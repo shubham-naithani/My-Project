@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  Observable } from 'rxjs';
+import {  BehaviorSubject, Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
+  DeleteDialogMessageSubject = new BehaviorSubject<any>('');
+  logoutDialogMessageSubject = new BehaviorSubject<any>('');
+
   baseURL:"http://localhost:65468/adminAdmin/";
 
   constructor(private http:HttpClient) { }
@@ -35,5 +38,11 @@ export class AdminService {
     return this.http.delete<any>(url + "delete_joining-form/{id}");
   }
 
+  receiveDeleteMessage(deleteDialogMessage: any) {
+    this.DeleteDialogMessageSubject.next(deleteDialogMessage)
+  }
 
+  receiveLogoutMessage(logoutDialogMessage: any) {
+    this.logoutDialogMessageSubject.next(logoutDialogMessage)
+  }
 }

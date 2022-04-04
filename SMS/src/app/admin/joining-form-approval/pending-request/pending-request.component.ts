@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogService } from 'src/app/shared/dialog.service';
+import { LogoutDialogComponent } from 'src/app/shared/logout-dialog/logout-dialog.component';
 import { AdminService } from '../../admin.service';
 
 export interface PendingRequests {
@@ -38,6 +39,7 @@ let ELEMENT_DATA: PendingRequests[] = [
   styleUrls: ['./pending-request.component.css']
 })
 export class PendingRequestComponent implements OnInit {
+deleteDialogMessage = 'showDeleteDialog'
   data: any
   id: any;
   displayedColumns: string[] = [
@@ -60,14 +62,13 @@ export class PendingRequestComponent implements OnInit {
       private adminservice: AdminService,
       private snackBar: MatSnackBar,
       private dialogService: DialogService
-    ) 
-    {
+    ) {
     this.getPendingRequests();
   }
 
   ngOnInit(): void {
   }
-  
+
   openApprovedDialog() {
     this.dialogService.openApprovedDialog()
   }
@@ -79,7 +80,6 @@ export class PendingRequestComponent implements OnInit {
           duration: 3000
         })
         this.dataSource = res.responseData;
-        console.log('pending',this.dataSource)
       } else {
         this.snackBar.open(res.message, 'undo', {
           duration: 3000
@@ -88,22 +88,28 @@ export class PendingRequestComponent implements OnInit {
     });
   }
 
-  deleteRequest(id: any) {    
-    if(confirm('Do you want to delete this joining form request') == true){
-      this.adminservice.deleteJoiningForm(id).subscribe((res: any) => {
-        if (res.statusCode == 200) {
-          this.snackBar.open(res.message, 'undo', {
-            duration: 3000
-          })
-          this.dataSource = res.responseData;
-          this.getPendingRequests();
-        } else {
-          this.snackBar.open(res.message, 'undo', {
-            duration: 3000
-          })
-        }
-      })
-    } 
+  sendMessage(deleteDialogMessage:any) {
+    this.adminservice.receiveDeleteMessage(deleteDialogMessage)
   }
 
+  deleteRequest(id: any) {debugger
+    this.dialogService.openConfirmDialog().afterClosed().subscribe(res => {
+      this.sendMessage(this.deleteDialogMessage)
+      if (res) {
+        this.adminservice.deleteJoiningForm(id).subscribe((res: any) => {
+          if (res.statusCode == 200) {
+            this.snackBar.open(res.message, 'undo', {
+              duration: 3000
+            })
+            this.dataSource = res.responseData;
+            this.getPendingRequests();
+          } else {
+            this.snackBar.open(res.message, 'undo', {
+              duration: 3000
+            })
+          }
+        })
+      }
+    })
+  }
 }

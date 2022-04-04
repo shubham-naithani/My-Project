@@ -68,7 +68,6 @@ export class RejectedRequestComponent implements OnInit {
           duration:3000
         })
         this.dataSource = res.responseData;
-        console.log('rejected ',this.dataSource)
       } else {
         this.snackBar.open(res.message,'undo',{
           duration:3000

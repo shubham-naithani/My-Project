@@ -15,6 +15,7 @@ import { PendingRequestComponent } from './joining-form-approval/pending-request
 import { RejectedRequestComponent } from './joining-form-approval/rejected-request/rejected-request.component';
 import { JoiningFormApprovalComponent } from './joining-form-approval/joining-form-approval.component';
 import { ApprovedDialogComponent } from './joining-form-approval/approved-dialog/approved-dialog.component';
+import { AdminService } from './admin.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ApprovedDialogComponent } from './joining-form-approval/approved-dialog
     ReactiveFormsModule,
     AdminRoutingModule,
     SharedModule,
-  ]
+  ],
+  providers:[AdminService]
 })
 export class AdminModule { }

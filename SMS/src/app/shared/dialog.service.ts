@@ -16,7 +16,7 @@ export class DialogService {
   openConfirmDialog() {
     return this.dialog.open(LogoutDialogComponent, {
       width: '350px',
-      height: '190px',
+      height: '200px',
       disableClose: true,
       panelClass: 'confirm-dialog-container'
     })

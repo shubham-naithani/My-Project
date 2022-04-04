@@ -13,29 +13,36 @@ export class SideBarComponent implements OnInit {
   userName: any;
   hidden = true;
   formsCount: any;
+  count = 0;
   constructor(
     private route: Router,
     private dialogSer: DialogService,
     private adminSer: AdminService
   ) {
+    this.toggleBadgeVisibility();
   }
 
   ngOnInit(): void {
     this.role = localStorage.getItem('userRole')
     this.userName = localStorage.getItem('userName')
+    this.formsCount = localStorage.getItem('formsCount')
   }
 
-  toggleBadgeVisibility() {    
+  toggleBadgeVisibility() {
+    debugger
+    this.hidden = false
     this.adminSer.getPendingFormRequests().subscribe((res: any) => {
       if (res.responseData != null) {
-        this.hidden = false
         let length = res.responseData.length
         localStorage.setItem('formsCount', length)
         this.formsCount = localStorage.getItem('formsCount')
+        if (this.count >= 1) {
+          this.hidden = true
+        } 
+        this.count++
       } else {
         this.hidden = true
       }
     })
   }
-
 }

@@ -79,7 +79,6 @@ export class ApprovedDialogComponent implements OnInit {
   }
 
   submit() {
-    debugger
     let Data = {
       ClassesYouWillTeach: this.approvedForm.value.ClassesYouWillTeach.join(),
       YourPeriods: this.approvedForm.value.YourPeriods.join()

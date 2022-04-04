@@ -73,7 +73,6 @@ export class ApprovedRequestComponent implements OnInit {
           duration:3000
         })
         this.dataSource = res.responseData;
-        console.log('approved',this.dataSource)
       } else {
         this.snackBar.open(res.message,'undo',{
           duration:3000

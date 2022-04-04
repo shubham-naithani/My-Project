@@ -23,7 +23,8 @@
     <!-- ----------------------------------------ADMIN-------------------------------------------------------->
     <div *ngIf="role == 'admin'">
         <a mat-list-item [routerLink]="['/joining-form-approval']"><span matBadge="{{formsCount}}"
-                matBadgeOverlap="false" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">joining form
+                matBadgeOverlap="false" [matBadgeHidden]="hidden" matBadgePosition="after" matBadgeColor="warn"
+                (click)="toggleBadgeVisibility()">joining form
                 requests</span></a>
         <a mat-list-item [routerLink]="['/student']">students</a>
         <a mat-list-item [routerLink]="['/teacher']">teachers</a>
