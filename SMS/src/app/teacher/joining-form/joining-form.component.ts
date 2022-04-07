@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AdminService } from 'src/app/admin/admin.service';
 import { TeacherService } from '../teacher.service';
 
 @Component({
@@ -12,19 +13,29 @@ import { TeacherService } from '../teacher.service';
 })
 export class JoiningFormComponent implements OnInit {
   joiningform: FormGroup;
+  rejectedFormMsg: string
 
   constructor(
     private fb: FormBuilder,
     private toast: ToastrService,
     private service: TeacherService,
     private route: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private adminSer:AdminService,
   ) {
     this.initForm();
   }
 
   ngOnInit() {
-
+    this.adminSer.rejectedFormMsgSubject.subscribe(data => {
+      if (data == 'Your joining form has been rejected') {
+        this.rejectedFormMsg = data
+        this.snackBar.open(this.rejectedFormMsg , 'Dismiss', {
+          duration:9000,
+          horizontalPosition:'end'
+        })
+      }   
+    })
   }
 
   initForm() {

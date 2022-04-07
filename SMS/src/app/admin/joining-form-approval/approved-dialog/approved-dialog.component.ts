@@ -6,11 +6,11 @@ import { DialogService } from 'src/app/shared/dialog.service';
 import { AdminService } from '../../admin.service';
 import { PendingRequestComponent } from '../pending-request/pending-request.component';
 
-interface class1 {
+interface selectClass {
   value: string;
 }
 
-interface period {
+interface selectPeriod {
   value: string;
 }
 @Component({
@@ -19,8 +19,10 @@ interface period {
   styleUrls: ['./approved-dialog.component.css']
 })
 export class ApprovedDialogComponent implements OnInit {
-  approvedForm: FormGroup
-  classes: class1[] = [
+  @ViewChild(PendingRequestComponent) pendingCom:PendingRequestComponent
+  approvedForm: FormGroup;
+  approvedMessage: 'You are approved';
+  classes: selectClass[] = [
     { value: 'Class 1' },
     { value: 'Class 2' },
     { value: 'Class 3' },
@@ -35,7 +37,7 @@ export class ApprovedDialogComponent implements OnInit {
     { value: 'Class 12' },
   ];
 
-  periods: period[] = [
+  periods: selectPeriod[] = [
     { value: 'Period 1' },
     { value: 'Period 2' },
     { value: 'Period 3' },
@@ -78,7 +80,8 @@ export class ApprovedDialogComponent implements OnInit {
     return this.approvedForm.get('YourPeriods') as FormControl;
   }
 
-  submit() {
+  
+  submit() {debugger
     let Data = {
       ClassesYouWillTeach: this.approvedForm.value.ClassesYouWillTeach.join(),
       YourPeriods: this.approvedForm.value.YourPeriods.join()
@@ -89,7 +92,6 @@ export class ApprovedDialogComponent implements OnInit {
           duration: 3000
         })
         this.dialog.closeAll();
-        this.adminservice.getPendingFormRequests();
       } else {
         this.snackBar.open(res.message, 'undo', {
           duration: 3000

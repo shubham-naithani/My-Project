@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/admin/admin.service';
 import { DialogService } from 'src/app/shared/dialog.service';
@@ -11,18 +12,29 @@ import { DialogService } from 'src/app/shared/dialog.service';
 export class TeacherDashboardComponent implements OnInit {
 userName:any
 logoutDialogMessage = 'showLogOutDialog';
+rejectedFormMsg: string
   constructor(
     private route:Router,
     private dialogService: DialogService,
-    private adminservice:AdminService
+    private adminSer:AdminService,
+    private snackBar:MatSnackBar
 
     ) { }
   ngOnInit(): void {
     this.userName = localStorage.getItem('userName')
+    // this.adminSer.rejectedFormMsgSubject.subscribe(data => {
+    //   if (data == 'Your joining form is rejected') {
+    //     this.rejectedFormMsg = data
+    //     this.snackBar.open(this.rejectedFormMsg , 'Dismiss' ,{
+    //       duration:3000,
+    //       horizontalPosition:'end'
+    //     })
+    //   }   
+    // })
   }
 
   sendMessage(logoutDialogMessage:any) {
-    this.adminservice.receiveLogoutMessage(logoutDialogMessage)
+    this.adminSer.receiveLogoutMessage(logoutDialogMessage)
   }
 
   logout() {

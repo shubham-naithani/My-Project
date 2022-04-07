@@ -21,7 +21,7 @@ export class SideBarComponent implements OnInit {
   {
     this.toggleBadgeVisibility();
   }
-
+  
   ngOnInit(): void {
     this.role = localStorage.getItem('userRole')
     this.userName = localStorage.getItem('userName')
@@ -39,7 +39,7 @@ export class SideBarComponent implements OnInit {
           this.hidden = true
         } 
         this.count = this.count  +1
-        return 0
+        return res
       } else {
         this.hidden = true
       }

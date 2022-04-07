@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { LogoutDialogComponent } from 'src/app/shared/logout-dialog/logout-dialog.component';
+import { SideBarComponent } from 'src/app/shared/side-bar/side-bar.component';
 import { AdminService } from '../../admin.service';
 
 export interface PendingRequests {
@@ -13,8 +14,6 @@ export interface PendingRequests {
   qualification: string;
   subjectsYouCanTeach: string;
   experienceOfTeaching: string;
-  classesYouWillTeach: string;
-  yourPeriods: string
   Approved: string
 }
 let ELEMENT_DATA: PendingRequests[] = [
@@ -27,8 +26,6 @@ let ELEMENT_DATA: PendingRequests[] = [
     qualification: '',
     subjectsYouCanTeach: '',
     experienceOfTeaching: '',
-    classesYouWillTeach: '',
-    yourPeriods: '',
     Approved: ''
   },
 ];
@@ -39,7 +36,12 @@ let ELEMENT_DATA: PendingRequests[] = [
   styleUrls: ['./pending-request.component.css']
 })
 export class PendingRequestComponent implements OnInit {
-deleteDialogMessage = 'showDeleteDialog'
+  @ViewChild(SideBarComponent) sideBarCom: SideBarComponent
+  deleteDialogMessage = 'showDeleteDialog'
+  rejectedMessage = 'Your joining form has been rejected';
+  formsCount: any;
+  hidden = true;
+  count = 0;
   data: any
   id: any;
   displayedColumns: string[] = [
@@ -51,22 +53,21 @@ deleteDialogMessage = 'showDeleteDialog'
     'qualification',
     'subjectsYouCanTeach',
     'experienceOfTeaching',
-    'classesYouWillTeach',
-    'yourPeriods',
     'Approved'
   ];
   dataSource = [];
 
   constructor
     (
-      private adminservice: AdminService,
       private snackBar: MatSnackBar,
-      private dialogService: DialogService
+      private dialogService: DialogService,
+      private adminSer: AdminService
     ) {
     this.getPendingRequests();
   }
 
-  ngOnInit(): void {
+  ngOnInit(){ 
+    this.formsCount = localStorage.getItem('formsCount')
   }
 
   openApprovedDialog() {
@@ -74,7 +75,7 @@ deleteDialogMessage = 'showDeleteDialog'
   }
 
   getPendingRequests() {
-    this.adminservice.getPendingFormRequests().subscribe((res: any) => {
+    this.adminSer.getPendingFormRequests().subscribe((res: any) => {
       if (res.statusCode == 200) {
         this.snackBar.open(res.message, 'undo', {
           duration: 3000
@@ -88,21 +89,38 @@ deleteDialogMessage = 'showDeleteDialog'
     });
   }
 
-  sendMessage(deleteDialogMessage:any) {
-    this.adminservice.receiveDeleteMessage(deleteDialogMessage)
+  sendMessage(deleteDialogMessage: any) {
+    this.adminSer.receiveDeleteMessage(deleteDialogMessage)
+  }
+
+  sendRejFormMsg(rejectedMessage:any) {
+    this.adminSer.sendFormRejMsg(rejectedMessage)
   }
 
   deleteRequest(id: any) {debugger
     this.dialogService.openConfirmDialog().afterClosed().subscribe(res => {
       this.sendMessage(this.deleteDialogMessage)
       if (res) {
-        this.adminservice.deleteJoiningForm(id).subscribe((res: any) => {
+        this.adminSer.deleteJoiningForm(id).subscribe((res: any) => {
           if (res.statusCode == 200) {
             this.snackBar.open(res.message, 'undo', {
               duration: 3000
             })
-            this.dataSource = res.responseData;
+            this.sendRejFormMsg(this.rejectedMessage)
             this.getPendingRequests();
+            this.adminSer.getPendingFormRequests().subscribe((res: any) => {
+              if (res.responseData != null) {
+                let length = res.responseData.length
+                localStorage.setItem('formsCount', length)
+                this.formsCount = localStorage.getItem('formsCount')
+                if (this.count >= 1) {
+                  this.hidden = true
+                }
+                this.count = this.count + 1
+              } else {
+                this.hidden = true
+              }
+            })
           } else {
             this.snackBar.open(res.message, 'undo', {
               duration: 3000

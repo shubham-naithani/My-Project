@@ -8,8 +8,8 @@
                 <mat-form-field>
                     <mat-label>Classes You Will Teach</mat-label>
                     <mat-select matInput formControlName="ClassesYouWillTeach" multiple>
-                        <mat-option *ngFor="let class1 of classes" [value]="class1.value">
-                            {{class1.value}}
+                        <mat-option *ngFor="let selectClass of classes " [value]="selectClass.value">
+                            {{selectClass.value}}
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="ClassesYouWillTeach.touched && !ClassesYouWillTeach.valid">
@@ -23,8 +23,8 @@
                 <mat-form-field>
                     <mat-label>Periods You Will Teach</mat-label>
                     <mat-select matInput formControlName="YourPeriods" multiple>
-                        <mat-option *ngFor="let period of periods" [value]="period.value">
-                            {{period.value}}
+                        <mat-option *ngFor="let selectPeriod of periods" [value]="selectPeriod.value">
+                            {{selectPeriod.value}}
                         </mat-option>
                     </mat-select><br><br>
                     <mat-error *ngIf="YourPeriods.touched && !YourPeriods.valid">
@@ -34,10 +34,10 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="btn">
+            <ng-container class="btn" style="margin-left:20%">
                 <button mat-flat-button type="reset">reset</button>
                 <button mat-raised-button color="primary" (click)="submit()">submit</button>
-            </div>
+            </ng-container>
         </div>
     </form>
 </div>
