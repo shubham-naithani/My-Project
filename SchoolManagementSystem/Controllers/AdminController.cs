@@ -78,7 +78,7 @@ namespace SchoolManagementSystem.Controllers
                 }
                 else
                 {
-                    response.Message = "Something Wrong";
+                    response.Message = "No Record";
                     response.StatusCode = HttpStatusCode.BadRequest;
                 }
             }
@@ -99,7 +99,7 @@ namespace SchoolManagementSystem.Controllers
             ApiResponse response = new ApiResponse();
             try
             {
-                var data = sms.Teacher_tbl.FirstOrDefault(a => a.IsActive == true && a.IsDeleted == false);
+                var data = sms.Teacher_tbl.FirstOrDefault(a => a.IsActive == true && a.IsDeleted == false && a.ID == mod.ID);
                 if (data != null)
                 {
                     data.ClassesYouWillTeach = mod.ClassesYouWillTeach;
@@ -110,7 +110,7 @@ namespace SchoolManagementSystem.Controllers
                     int isSaved = sms.SaveChanges();
                     if (isSaved > 0)
                     {
-                        response.Message = data.FirstName + " " +  "joining request has been approved";
+                        response.Message = data.FirstName + " " +  "joining form request has been approved";
                         response.StatusCode = HttpStatusCode.OK;
                     }
                     else
@@ -138,13 +138,13 @@ namespace SchoolManagementSystem.Controllers
 
         [Route("delete_joining-form/{id}")]
         [HttpDelete]
-        public ApiResponse deljoiningform()
+        public ApiResponse deljoiningform( int id)
         {
             ApiResponse response = new ApiResponse();
             {
                 try
                 {
-                    var data = sms.Teacher_tbl.FirstOrDefault(a => a.IsActive == true && a.IsDeleted == false);
+                    var data = sms.Teacher_tbl.FirstOrDefault(a => a.IsActive == true && a.IsDeleted == false && a.ID == id);
                     if (data != null)
                     {
                         data.IsActive = false;
@@ -196,7 +196,7 @@ namespace SchoolManagementSystem.Controllers
                 }
                 else
                 {
-                    response.Message = "Something Wrong";
+                    response.Message = "No Record";
                     response.StatusCode = HttpStatusCode.BadRequest;
                 }
             }
