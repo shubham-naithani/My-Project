@@ -17,9 +17,9 @@
         <button type="submit" [disabled]="verifyotp.invalid">Verify</button>
         <div *ngIf="showresend">
           <a href="./resendotp" class="btn">resend OTP</a>
-          <app-progress-bar *ngIf="progressBar" class="backgroundchange"></app-progress-bar>
         </div>
       </form>
     </mat-card>
   </div>
 </div>
+<app-progress-bar></app-progress-bar>

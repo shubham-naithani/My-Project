@@ -14,7 +14,6 @@ import { TeacherService } from '../teacher.service';
 export class JoiningFormComponent implements OnInit {
   joiningform: FormGroup;
   rejectedFormMsg: string;
-  progressBar: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -138,7 +137,6 @@ export class JoiningFormComponent implements OnInit {
   submit() {
     this.joiningform.markAllAsTouched();
     if (this.joiningform.valid) {
-      this.progressBar = true
       let data = this.joiningform.value;
       this.service.Joiningform(data).subscribe((res: any) => {
         if (res.statusCode == 200) {
@@ -150,7 +148,6 @@ export class JoiningFormComponent implements OnInit {
             duration: 3000
           })
         }
-        this.progressBar = false
       })
     }
   }

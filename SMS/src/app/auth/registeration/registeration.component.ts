@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -13,51 +14,50 @@ import { AuthService } from '../auth.service';
 export class RegisterationComponent implements OnInit {
   registerform: FormGroup;
   hide: boolean;
-  progressBar:boolean=false;
 
   constructor(
-    private fb: FormBuilder, 
-    private service: AuthService, 
-    private route: Router, 
+    private fb: FormBuilder,
+    private service: AuthService,
+    private route: Router,
     private toast: ToastrService,
-    private router:Router,
-    private snackBar:MatSnackBar
-    ) { 
-      this.initForm();
-    }
+    private router: Router,
+    private snackBar: MatSnackBar,
+  ) {
+    this.initForm();
+  }
 
-  ngOnInit(){
-  
+  ngOnInit() {
+
   }
 
   initForm() {
     this.registerform = this.fb.group({
       FirstName: ['',
-    [Validators.required]
-  ],
+        [Validators.required]
+      ],
       LastName: ['',
-    [Validators.required]
-  ],
+        [Validators.required]
+      ],
       Email: ['',
-    [Validators.required,Validators.email]
-  ],
+        [Validators.required, Validators.email]
+      ],
       Password: ['',
-    [Validators.required,Validators.minLength(4),Validators.maxLength(8)]
-  ],
+        [Validators.required, Validators.minLength(4), Validators.maxLength(8)]
+      ],
       DOB: ['',
-    [Validators.required]
-  ],
+        [Validators.required]
+      ],
       ContactNo: ['',
-    [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
-  ],
-      Role:['',
-    [Validators.required]
-  ]
+        [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
+      ],
+      Role: ['',
+        [Validators.required]
+      ]
     })
-    this.hide=true;
+    this.hide = true;
   }
 
-   get FirstName(): AbstractControl {
+  get FirstName(): AbstractControl {
     return this.registerform.get('FirstName') as FormControl;
   }
   get LastName(): AbstractControl {
@@ -81,19 +81,17 @@ export class RegisterationComponent implements OnInit {
 
   submit() {
     this.registerform.markAllAsTouched();
-    if(this.registerform.valid){
-    this.progressBar=true;
-    let data = this.registerform.value;
-    this.service.registeration(data).subscribe((res: any) => {
-      if(res.statusCode == 200){ 
-        this.snackBar.open(res.message)
-        this.router.navigateByUrl("/VerifyOTP");
-       }else{
-        this.snackBar.open(res.message)
-        this.route.navigateByUrl('/Login')
-       }
-     })
+    if (this.registerform.valid) {
+      let data = this.registerform.value;
+      this.service.registeration(data).subscribe((res: any) => {
+        if (res.statusCode == 200) {
+          this.snackBar.open(res.message)
+          this.router.navigateByUrl("/VerifyOTP");
+        } else {
+          this.snackBar.open(res.message)
+          this.route.navigateByUrl('/Login')
+        }
+      })
     }
-     this.progressBar=false;
   }
 }

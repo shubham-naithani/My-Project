@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from 'src/app/app.component';
+import { ProgressBarInterceptor } from 'src/app/shared/interceptors/progress-bar.interceptor';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -14,7 +16,6 @@ export class LoginComponent implements OnInit {
   loginform: FormGroup;
   successmessage: any;
   hide: boolean;
-  progressBar: boolean = false;
   Role: any;
   tokenData:any
 
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private toat: ToastrService,
     private route: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {
     this.initForm();
   }
@@ -58,10 +59,9 @@ export class LoginComponent implements OnInit {
         Email: this.loginform.value.Email,
         Password: this.loginform.value.Password
       }
-      this.progressBar = true;
       this.authService.login(data).subscribe((res: any) => {
         this.authService.tokenDecoder(res.token); 
-        const tokenData = JSON.parse(localStorage.getItem('token')|| '{}');
+        const tokenData = JSON.parse(localStorage.getItem('decodedTokenData')|| '{}');
          
         var name = tokenData.Name
         var role = tokenData.Role
@@ -91,7 +91,6 @@ export class LoginComponent implements OnInit {
         } else {
           this.snackBar.open(res.message)
         }
-        this.progressBar = false;       
       });
     } 
   }

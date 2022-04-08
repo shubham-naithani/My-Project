@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -15,7 +16,6 @@ export class VerifyOtpComponent implements OnInit {
   successmessage:string;
   showresend:boolean = false;
   Contact_No:any;
-  progressBar:boolean=false;
 
   constructor(
     private otp: FormBuilder,
@@ -23,7 +23,7 @@ export class VerifyOtpComponent implements OnInit {
     private route: ActivatedRoute,
     private toast:ToastrService,
     private router:Router,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
     ) { 
       this.initForm();
     }
@@ -51,12 +51,10 @@ export class VerifyOtpComponent implements OnInit {
     if(this.verifyotp.invalid){
       return;
     }
-    this.progressBar=true;
     if (this.verifyotp.valid) {
       let data = {
         OTP: this.verifyotp.value.OTP 
       }    
-
       this.authservice.verifyotp(data).subscribe((ver: any) => {
           if (ver.statusCode == 200) {
             this.snackBar.open(ver.message)
@@ -70,7 +68,6 @@ export class VerifyOtpComponent implements OnInit {
         } else {
           this.snackBar.open(ver.message)
         }
-        this.progressBar=false;
       });
     }
   }

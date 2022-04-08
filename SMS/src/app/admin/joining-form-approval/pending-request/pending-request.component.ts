@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppComponent } from 'src/app/app.component';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { LogoutDialogComponent } from 'src/app/shared/logout-dialog/logout-dialog.component';
 import { SideBarComponent } from 'src/app/shared/side-bar/side-bar.component';
@@ -44,7 +45,6 @@ export class PendingRequestComponent implements OnInit {
   count = 0;
   data: any
   id: any;
-  progressBar: boolean = false
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -62,8 +62,8 @@ export class PendingRequestComponent implements OnInit {
     (
       private snackBar: MatSnackBar,
       private dialogService: DialogService,
-      private adminSer: AdminService
-    ) {
+      private adminSer: AdminService,
+  ) {
     this.getPendingRequests();
   }
 
@@ -75,8 +75,7 @@ export class PendingRequestComponent implements OnInit {
     this.dialogService.openApprovedDialog()
   }
 
-  getPendingRequests() {debugger
-    this.progressBar = true
+  getPendingRequests() {
     this.adminSer.getPendingFormRequests().subscribe((res: any) => {
       if (res.statusCode == 200) {
         this.snackBar.open(res.message, 'undo', {
@@ -88,7 +87,6 @@ export class PendingRequestComponent implements OnInit {
           duration: 3000
         })
       }
-      this.progressBar = false
     });
   }
 
@@ -101,10 +99,8 @@ export class PendingRequestComponent implements OnInit {
   }
 
   deleteRequest(id: any) {
-    debugger
     this.dialogService.openConfirmDialog().afterClosed().subscribe(res => {
       this.sendMessage(this.deleteDialogMessage)
-      this.progressBar = true
       if (res) {
         this.adminSer.deleteJoiningForm(id).subscribe((res: any) => {
           if (res.statusCode == 200) {
@@ -131,7 +127,6 @@ export class PendingRequestComponent implements OnInit {
               duration: 3000
             })
           }
-          this.progressBar = false
         })
       }
     })

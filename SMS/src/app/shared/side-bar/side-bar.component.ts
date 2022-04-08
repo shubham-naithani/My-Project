@@ -38,7 +38,7 @@ export class SideBarComponent implements OnInit {
         if (this.count >= 1) {
           this.hidden = true
         } 
-        this.count = this.count  +1
+        this.count = this.count +1
         return res
       } else {
         this.hidden = true

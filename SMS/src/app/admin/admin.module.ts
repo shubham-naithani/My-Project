@@ -16,6 +16,9 @@ import { RejectedRequestComponent } from './joining-form-approval/rejected-reque
 import { JoiningFormApprovalComponent } from './joining-form-approval/joining-form-approval.component';
 import { ApprovedDialogComponent } from './joining-form-approval/approved-dialog/approved-dialog.component';
 import { AdminService } from './admin.service';
+import { AuthService } from '../auth/auth.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProgressBarInterceptor } from '../shared/interceptors/progress-bar.interceptor';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,13 @@ import { AdminService } from './admin.service';
     AdminRoutingModule,
     SharedModule,
   ],
-  providers:[AdminService]
+  providers: [
+    [AuthService],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProgressBarInterceptor,
+      multi: true,
+    }
+  ],
 })
 export class AdminModule { }

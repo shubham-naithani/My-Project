@@ -29,7 +29,7 @@ export class AdminService {
     return this.http.get<any>(url + "get_approved_requests")
   }
 
-  postPendingForm(Data: any): Observable<any> {debugger
+  postPendingForm(Data: any): Observable<any> {
     let url = 'http://localhost:65468/adminAdmin/'
     return this.http.post<any>(url + "post_approved_requests", Data)
   }

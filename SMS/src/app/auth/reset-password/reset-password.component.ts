@@ -13,14 +13,13 @@ import { AuthService } from '../auth.service';
 export class ResetPasswordComponent implements OnInit {
   resetpass:FormGroup;
   successmessage:any;
-  progressBar:boolean=false;
 
   constructor(
     private rp:FormBuilder,
     private authservice:AuthService,
     private toast:ToastrService,
     private route :Router,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
     ) { 
       this.initForm();
     }
@@ -42,11 +41,11 @@ export class ResetPasswordComponent implements OnInit {
   }
   
   get formcontrol(){return this.resetpass.controls}
-  submitform(){
+
+  submitform(){debugger
     if(this.resetpass.invalid){
       return;
     }
-    this.progressBar=true;   
     if(this.resetpass.valid){
       let data ={
         Password:String(this.resetpass.value.Password),
@@ -54,11 +53,10 @@ export class ResetPasswordComponent implements OnInit {
       this.authservice.resetpassword(data).subscribe((res :any) =>{
      
         if(res.statusCode==200){
-          this.snackBar.open(res.open)
+          this.snackBar.open(res.message)
           this.route.navigateByUrl("/Login");
         }else{
-          this.snackBar.open(res.open)
+          this.snackBar.open(res.message)
         }
-        this.progressBar=false;
       })
   } }}

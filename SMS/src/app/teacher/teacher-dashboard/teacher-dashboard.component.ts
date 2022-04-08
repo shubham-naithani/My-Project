@@ -10,16 +10,17 @@ import { DialogService } from 'src/app/shared/dialog.service';
   styleUrls: ['./teacher-dashboard.component.css']
 })
 export class TeacherDashboardComponent implements OnInit {
-userName:any
-logoutDialogMessage = 'showLogOutDialog';
-rejectedFormMsg: string
+  userName: any
+  logoutDialogMessage = 'showLogOutDialog';
+  rejectedFormMsg: string;
+  progressBar: boolean = false
   constructor(
-    private route:Router,
+    private route: Router,
     private dialogService: DialogService,
-    private adminSer:AdminService,
-    private snackBar:MatSnackBar
+    private adminSer: AdminService,
+    private snackBar: MatSnackBar
 
-    ) { }
+  ) { }
   ngOnInit(): void {
     this.userName = localStorage.getItem('userName')
     // this.adminSer.rejectedFormMsgSubject.subscribe(data => {
@@ -33,7 +34,7 @@ rejectedFormMsg: string
     // })
   }
 
-  sendMessage(logoutDialogMessage:any) {
+  sendMessage(logoutDialogMessage: any) {
     this.adminSer.receiveLogoutMessage(logoutDialogMessage)
   }
 
@@ -42,9 +43,11 @@ rejectedFormMsg: string
     this.dialogService.openConfirmDialog()
       .afterClosed().subscribe(res => {
         if (res) {
+          this.progressBar = true
           localStorage.clear();
           this.route.navigateByUrl('/Login')
         }
+        this.progressBar = false
       })
   }
 }

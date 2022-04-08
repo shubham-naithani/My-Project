@@ -9,19 +9,20 @@ import { DialogService } from 'src/app/shared/dialog.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  userName:any
+  userName: any
   logoutDialogMessage = 'showLogOutDialog';
+  progressBar: boolean = false
   constructor(
-    private route:Router,
+    private route: Router,
     private dialogService: DialogService,
-    private adminservice:AdminService
-    ) { }
+    private adminservice: AdminService
+  ) { }
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('userName')
   }
 
-  sendMessage(logoutDialogMessage:any) {
+  sendMessage(logoutDialogMessage: any) {
     this.adminservice.receiveLogoutMessage(logoutDialogMessage)
   }
 
@@ -30,9 +31,11 @@ export class DashboardComponent implements OnInit {
     this.dialogService.openConfirmDialog()
       .afterClosed().subscribe(res => {
         if (res) {
+          this.progressBar = true
           localStorage.clear();
           this.route.navigateByUrl('/Login')
         }
+        this.progressBar = false
       })
-  }  
+  }
 }

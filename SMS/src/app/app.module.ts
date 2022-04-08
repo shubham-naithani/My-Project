@@ -7,7 +7,8 @@ import { MaterialModule } from './material/material.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthRoutingModule } from './auth/auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProgressBarInterceptor } from './shared/interceptors/progress-bar.interceptor'
 import { ToastrModule } from 'ngx-toastr';
 import { TeacherModule } from './teacher/teacher.module';
 import { CommonModule } from '@angular/common';
@@ -16,6 +17,8 @@ import { AdminModule } from './admin/admin.module';
 import { LogoutDialogComponent } from './shared/logout-dialog/logout-dialog.component';
 import { ApprovedDialogComponent } from './admin/joining-form-approval/approved-dialog/approved-dialog.component';
 import { AdminService } from './admin/admin.service';
+import { SharedModule } from './shared/shared.module';
+import { AuthService } from './auth/auth.service';
 
 
 @NgModule({
@@ -36,9 +39,17 @@ import { AdminService } from './admin/admin.service';
     TeacherModule,
     StudentModule,
     AdminModule,
-  ], 
-  providers: [AdminService],
+    SharedModule
+  ],
+  providers: [
+    [AuthService],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProgressBarInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
-  entryComponents:[LogoutDialogComponent,ApprovedDialogComponent]
+  entryComponents: [LogoutDialogComponent, ApprovedDialogComponent]
 })
 export class AppModule { }

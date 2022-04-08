@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppComponent } from 'src/app/app.component';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { AdminService } from '../../admin.service';
 import { PendingRequestComponent } from '../pending-request/pending-request.component';
@@ -22,7 +23,6 @@ export class ApprovedDialogComponent implements OnInit {
   @ViewChild(PendingRequestComponent) pendingCom: PendingRequestComponent
   approvedForm: FormGroup;
   approvedMessage: 'You are approved';
-  progressBar: boolean = false
   classes: selectClass[] = [
     { value: 'Class 1' },
     { value: 'Class 2' },
@@ -55,8 +55,7 @@ export class ApprovedDialogComponent implements OnInit {
       private snackBar: MatSnackBar,
       private dialogSer: DialogService,
       private dialog: MatDialog,
-
-  ) {
+    ) {
     this.initForm();
   }
 
@@ -83,14 +82,12 @@ export class ApprovedDialogComponent implements OnInit {
 
 
   onSubmit() {
-    debugger
     this.approvedForm.markAllAsTouched();
     let Data = {
       ClassesYouWillTeach: this.approvedForm.value.ClassesYouWillTeach.join(),
       YourPeriods: this.approvedForm.value.YourPeriods.join()
     }
     if (Data != null) {
-      this.progressBar = true
       this.adminservice.postPendingForm(Data).subscribe((res: any) => {
         if (res.statusCode == 200) {
           this.snackBar.open(res.message, 'undo', {
@@ -102,7 +99,6 @@ export class ApprovedDialogComponent implements OnInit {
             duration: 3000
           })
         }
-        this.progressBar = false
       });
     }
   }

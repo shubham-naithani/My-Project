@@ -11,25 +11,24 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  @ViewChild(SideBarComponent) sideBarCom:SideBarComponent
-  userName:any;
-  formsCount:any;
-  logoutDialogMessage = 'showLogOutDialog'
+  @ViewChild(SideBarComponent) sideBarCom: SideBarComponent
+  userName: any;
+  formsCount: any;
+  logoutDialogMessage = 'showLogOutDialog';
   constructor
     (
       private route: Router,
       private dialogService: DialogService,
-      private adminservice:AdminService
-    ) 
-    {
-      
-    }
+      private adminservice: AdminService
+    ) {
 
-  ngOnInit(){
-   this.userName = localStorage.getItem('userName')
   }
 
-  sendMessage(logoutDialogMessage:any) {
+  ngOnInit() {
+    this.userName = localStorage.getItem('userName')
+  }
+
+  sendMessage(logoutDialogMessage: any) {
     this.adminservice.receiveLogoutMessage(logoutDialogMessage)
   }
 

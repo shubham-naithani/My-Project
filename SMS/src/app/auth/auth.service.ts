@@ -33,7 +33,8 @@ export class AuthService {
     try {
       var decodeData: any = jwt_decode(token);
       var tokenData = { Role: decodeData.Role, Name: decodeData.Name }
-      localStorage.setItem('token', JSON.stringify(tokenData));
+      localStorage.setItem('token',token);
+      localStorage.setItem('decodedTokenData', JSON.stringify(tokenData));
     }
     catch (Error) {
       return token;

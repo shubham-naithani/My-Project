@@ -14,14 +14,13 @@ export class AdmissionFormComponent implements OnInit {
   admissionform: FormGroup
   form: FormGroup
   successmessage: any;
-  progressBar: boolean = false
 
   constructor(
     private fb: FormBuilder,
     private toast: ToastrService,
     private service: StudentService,
     private route: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {
     this.initForm();
   }
@@ -130,7 +129,6 @@ export class AdmissionFormComponent implements OnInit {
   submit() {
     this.admissionform.markAllAsTouched();
     if (this.admissionform.valid) {
-      this.progressBar = true
       let data = this.admissionform.value;
       this.service.Admission(data).subscribe((res: any) => {
         if (res.statusCode == 200) {
@@ -138,7 +136,6 @@ export class AdmissionFormComponent implements OnInit {
         } else {
           this.snackBar.open(res.message)
         }
-        this.progressBar = false
       })
     }
   }

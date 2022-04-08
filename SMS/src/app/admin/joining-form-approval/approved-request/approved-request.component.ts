@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppComponent } from 'src/app/app.component';
 import { AdminService } from '../../admin.service';
 
 export interface ApprovedRequests {
@@ -39,7 +40,6 @@ let ELEMENT_DATA: ApprovedRequests[] = [
 })
 export class ApprovedRequestComponent implements OnInit {
   data: any
-  progressBar: boolean = false
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -59,7 +59,7 @@ export class ApprovedRequestComponent implements OnInit {
     (
       private adminservice: AdminService,
       private snackBar: MatSnackBar,
-  ) {
+    ) {
     this.getApprovedRequests();
   }
 
@@ -67,7 +67,6 @@ export class ApprovedRequestComponent implements OnInit {
   }
 
   getApprovedRequests() {
-    this.progressBar = true
     this.adminservice.getApprovedRequests().subscribe((res: any) => {
       if (res.statusCode == 200) {
         this.snackBar.open(res.message, 'undo', {
@@ -80,7 +79,6 @@ export class ApprovedRequestComponent implements OnInit {
         })
         console.log('get rejected req')
       }
-      this.progressBar = false
     })
   }
 }
