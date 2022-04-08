@@ -99,7 +99,7 @@ namespace SchoolManagementSystem.Controllers
             ApiResponse response = new ApiResponse();
             try
             {
-                var data = sms.Teacher_tbl.FirstOrDefault(a => a.IsActive == true && a.IsDeleted == false && a.ID == mod.ID);
+                var data = sms.Teacher_tbl.FirstOrDefault(a => a.IsActive == true && a.IsDeleted == false);
                 if (data != null)
                 {
                     data.ClassesYouWillTeach = mod.ClassesYouWillTeach;

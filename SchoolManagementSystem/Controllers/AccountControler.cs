@@ -297,7 +297,7 @@ namespace SchoolManagementSystem.Controllers
             ApiResponse response = new ApiResponse();
             try
             {
-                var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false && x.ContactNo == reset.ContactNo);
+                var data = sms.Registeration_tbl.FirstOrDefault(x => x.IsActive == true && x.IsDeleted == false);
                 if (data != null)
                 {
                     using var hmac = new HMACSHA512();
