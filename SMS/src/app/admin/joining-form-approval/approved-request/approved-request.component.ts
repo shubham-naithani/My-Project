@@ -5,30 +5,30 @@ import { AdminService } from '../../admin.service';
 export interface ApprovedRequests {
   id: number;
   firstName: string;
-  email:string;
-  nationality:string;
-  maritialStatus:string;
-  qualification:string;
-  subjectsYouCanTeach:string;
-  experienceOfTeaching:string;
-  classesYouWillTeach:string;
-  yourPeriods:string;
-  Approved:string;
+  email: string;
+  nationality: string;
+  maritialStatus: string;
+  qualification: string;
+  subjectsYouCanTeach: string;
+  experienceOfTeaching: string;
+  classesYouWillTeach: string;
+  yourPeriods: string;
+  Approved: string;
 }
 
 let ELEMENT_DATA: ApprovedRequests[] = [
   {
-    id: 0, 
+    id: 0,
     firstName: '',
-    email:'',
-    nationality:'',
-    maritialStatus:'',
-    qualification:'',
-    subjectsYouCanTeach:'',
-    experienceOfTeaching:'',
-    classesYouWillTeach:'',
-    yourPeriods:'',
-    Approved:''
+    email: '',
+    nationality: '',
+    maritialStatus: '',
+    qualification: '',
+    subjectsYouCanTeach: '',
+    experienceOfTeaching: '',
+    classesYouWillTeach: '',
+    yourPeriods: '',
+    Approved: ''
   },
 ];
 
@@ -38,11 +38,12 @@ let ELEMENT_DATA: ApprovedRequests[] = [
   styleUrls: ['./approved-request.component.css']
 })
 export class ApprovedRequestComponent implements OnInit {
-  data:any
+  data: any
+  progressBar: boolean = false
   displayedColumns: string[] = [
-    'id', 
-    'firstName', 
-    'email', 
+    'id',
+    'firstName',
+    'email',
     'nationality',
     'maritialStatus',
     'qualification',
@@ -55,30 +56,31 @@ export class ApprovedRequestComponent implements OnInit {
   dataSource = [];
 
   constructor
-  (
-    private adminservice: AdminService,
-    private snackBar: MatSnackBar,
-  )
-   { 
-     this.getApprovedRequests();
-   }
+    (
+      private adminservice: AdminService,
+      private snackBar: MatSnackBar,
+  ) {
+    this.getApprovedRequests();
+  }
 
   ngOnInit(): void {
   }
 
   getApprovedRequests() {
-    this.adminservice.getApprovedRequests().subscribe((res:any) => {
+    this.progressBar = true
+    this.adminservice.getApprovedRequests().subscribe((res: any) => {
       if (res.statusCode == 200) {
-        this.snackBar.open(res.message,'undo',{
-          duration:3000
+        this.snackBar.open(res.message, 'undo', {
+          duration: 3000
         })
         this.dataSource = res.responseData;
       } else {
-        this.snackBar.open(res.message,'undo',{
-          duration:3000
+        this.snackBar.open(res.message, 'undo', {
+          duration: 3000
         })
         console.log('get rejected req')
       }
+      this.progressBar = false
     })
   }
 }

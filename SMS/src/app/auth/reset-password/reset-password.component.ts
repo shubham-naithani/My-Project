@@ -13,7 +13,7 @@ import { AuthService } from '../auth.service';
 export class ResetPasswordComponent implements OnInit {
   resetpass:FormGroup;
   successmessage:any;
-  spinner:boolean=false;
+  progressBar:boolean=false;
 
   constructor(
     private rp:FormBuilder,
@@ -46,7 +46,7 @@ export class ResetPasswordComponent implements OnInit {
     if(this.resetpass.invalid){
       return;
     }
-    this.spinner=true;   
+    this.progressBar=true;   
     if(this.resetpass.valid){
       let data ={
         Password:String(this.resetpass.value.Password),
@@ -59,6 +59,6 @@ export class ResetPasswordComponent implements OnInit {
         }else{
           this.snackBar.open(res.open)
         }
-        this.spinner=false;
+        this.progressBar=false;
       })
   } }}

@@ -15,7 +15,7 @@ export class VerifyOtpComponent implements OnInit {
   successmessage:string;
   showresend:boolean = false;
   Contact_No:any;
-  spinner:boolean=false;
+  progressBar:boolean=false;
 
   constructor(
     private otp: FormBuilder,
@@ -51,7 +51,7 @@ export class VerifyOtpComponent implements OnInit {
     if(this.verifyotp.invalid){
       return;
     }
-    this.spinner=true;
+    this.progressBar=true;
     if (this.verifyotp.valid) {
       let data = {
         OTP: this.verifyotp.value.OTP 
@@ -70,7 +70,7 @@ export class VerifyOtpComponent implements OnInit {
         } else {
           this.snackBar.open(ver.message)
         }
-        this.spinner=false;
+        this.progressBar=false;
       });
     }
   }

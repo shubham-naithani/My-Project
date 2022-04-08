@@ -1,3 +1,4 @@
+<app-progress-bar *ngIf="progressBar" class="backgroundchange"></app-progress-bar>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="id">
@@ -52,8 +53,8 @@
 
     <ng-container matColumnDef="Approved">
         <th mat-header-cell *matHeaderCellDef> Approved </th>
-        <td mat-cell *matCellDef="let element"> 
-            <mat-icon>done</mat-icon>        
+        <td mat-cell *matCellDef="let element">
+            <mat-icon>done</mat-icon>
         </td>
     </ng-container>
 

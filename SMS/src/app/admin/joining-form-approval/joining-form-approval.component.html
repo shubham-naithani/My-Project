@@ -1,21 +1,18 @@
 <div class="main-container">
-<mat-tab-group #tabRef (selectedTabChange)="tabChanger(tabRef.selectedIndex)">
-    <mat-tab label="Pending Requests">
-        <app-pending-request></app-pending-request>
-    </mat-tab>
-    <mat-tab label="Approved Requests">
-        <app-approved-request></app-approved-request>
-    </mat-tab>
-    <mat-tab label="Rejected Requests">
-        <app-rejected-request></app-rejected-request>
-    </mat-tab>
-</mat-tab-group>
+    <mat-tab-group #tabRef (selectedTabChange)="tabChanger(tabRef.selectedIndex)" mat-align-tabs="center">
+        <mat-tab label="PENDING REQUESTS">
+            <app-pending-request></app-pending-request>
+        </mat-tab>
+        <mat-tab label="APPROVED REQUESTS">
+            <app-approved-request></app-approved-request>
+        </mat-tab>
+        <mat-tab label="REJECTED REQUESTS">
+            <app-rejected-request></app-rejected-request>
+        </mat-tab>
+    </mat-tab-group>
 
-<div class="footer">
-    <mat-paginator [length]="100"
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    aria-label="Select page">
-</mat-paginator>
-</div>
+    <div class="footer">
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+        </mat-paginator>
+    </div>
 </div>

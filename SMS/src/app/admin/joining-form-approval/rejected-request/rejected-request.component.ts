@@ -36,6 +36,7 @@ let ELEMENT_DATA: RejectedRequests[] = [
 export class RejectedRequestComponent implements OnInit {
   data: any
   id: any;
+  progressBar:boolean = false
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -61,7 +62,8 @@ export class RejectedRequestComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getDeleteRequests() {
+  getDeleteRequests() {debugger
+    this.progressBar = true
     this.adminservice.getDeleteRequest().subscribe((res: any) => {
       if (res.statusCode == 200) {
         this.snackBar.open(res.message,'undo',{
@@ -73,6 +75,7 @@ export class RejectedRequestComponent implements OnInit {
           duration:3000
         })
       }
+      this.progressBar = false
     })
   }
 

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginform: FormGroup;
   successmessage: any;
   hide: boolean;
-  spinner: boolean = false;
+  progressBar: boolean = false;
   Role: any;
   tokenData:any
 
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
         Email: this.loginform.value.Email,
         Password: this.loginform.value.Password
       }
-      this.spinner = true;
+      this.progressBar = true;
       this.authService.login(data).subscribe((res: any) => {
         this.authService.tokenDecoder(res.token); 
         const tokenData = JSON.parse(localStorage.getItem('token')|| '{}');
@@ -91,8 +91,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.snackBar.open(res.message)
         }
-        this.spinner = false;
-        
+        this.progressBar = false;       
       });
     } 
   }

@@ -19,9 +19,10 @@ interface selectPeriod {
   styleUrls: ['./approved-dialog.component.css']
 })
 export class ApprovedDialogComponent implements OnInit {
-  @ViewChild(PendingRequestComponent) pendingCom:PendingRequestComponent
+  @ViewChild(PendingRequestComponent) pendingCom: PendingRequestComponent
   approvedForm: FormGroup;
   approvedMessage: 'You are approved';
+  progressBar: boolean = false
   classes: selectClass[] = [
     { value: 'Class 1' },
     { value: 'Class 2' },
@@ -80,23 +81,29 @@ export class ApprovedDialogComponent implements OnInit {
     return this.approvedForm.get('YourPeriods') as FormControl;
   }
 
-  
-  submit() {debugger
+
+  onSubmit() {
+    debugger
+    this.approvedForm.markAllAsTouched();
     let Data = {
       ClassesYouWillTeach: this.approvedForm.value.ClassesYouWillTeach.join(),
       YourPeriods: this.approvedForm.value.YourPeriods.join()
     }
-    this.adminservice.postPendingForm(Data).subscribe((res: any) => {
-      if (res.statusCode == 200) {
-        this.snackBar.open(res.message, 'undo', {
-          duration: 3000
-        })
-        this.dialog.closeAll();
-      } else {
-        this.snackBar.open(res.message, 'undo', {
-          duration: 3000
-        })
-      }
-    });
+    if (Data != null) {
+      this.progressBar = true
+      this.adminservice.postPendingForm(Data).subscribe((res: any) => {
+        if (res.statusCode == 200) {
+          this.snackBar.open(res.message, 'undo', {
+            duration: 3000
+          })
+          this.dialog.closeAll();
+        } else {
+          this.snackBar.open(res.message, 'undo', {
+            duration: 3000
+          })
+        }
+        this.progressBar = false
+      });
+    }
   }
 }

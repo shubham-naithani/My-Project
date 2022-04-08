@@ -13,7 +13,7 @@ import { AuthService } from '../auth.service';
 export class RegisterationComponent implements OnInit {
   registerform: FormGroup;
   hide: boolean;
-  spinner:boolean=false;
+  progressBar:boolean=false;
 
   constructor(
     private fb: FormBuilder, 
@@ -82,7 +82,7 @@ export class RegisterationComponent implements OnInit {
   submit() {
     this.registerform.markAllAsTouched();
     if(this.registerform.valid){
-    this.spinner=true;
+    this.progressBar=true;
     let data = this.registerform.value;
     this.service.registeration(data).subscribe((res: any) => {
       if(res.statusCode == 200){ 
@@ -94,6 +94,6 @@ export class RegisterationComponent implements OnInit {
        }
      })
     }
-     this.spinner=false;
+     this.progressBar=false;
   }
 }

@@ -8,3 +8,6 @@ mat-paginator{
     background-color: rgba(35, 35, 35, 0.571);
     color: #fff;
 }
+mat-tab-group{
+    margin-bottom: 10% !important;
+}

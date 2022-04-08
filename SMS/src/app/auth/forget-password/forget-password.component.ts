@@ -16,7 +16,7 @@ export class ForgetPasswordComponent implements OnInit {
   showreset:boolean=false;
   showsignup:boolean=false;
   enable:string="block";
-  spinner:boolean=false;
+  progressBar:boolean=false;
 
   constructor(
     private fp:FormBuilder,
@@ -46,7 +46,7 @@ export class ForgetPasswordComponent implements OnInit {
   get formcontrol(){return this.forgetpassword.controls}
   submitform(){
     this.forgetpassword.markAllAsTouched();
-    this.spinner=true;
+    this.progressBar=true;
     if(this.forgetpassword.valid){
      let data=this.forgetpassword.value
      this.authservice.forgetpassword(data).subscribe((forget: any)=>{      
@@ -64,7 +64,7 @@ export class ForgetPasswordComponent implements OnInit {
        }
      })
     }
-     this.spinner=false;
+     this.progressBar=false;
   }
   
 

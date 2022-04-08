@@ -13,7 +13,7 @@ export class ResendOtpComponent implements OnInit {
   resendotpform:FormGroup;
   successmessage:string;
   verifyotp:boolean=true;
-  spinner:boolean=false;
+  progressBar:boolean=false;
 
   constructor(
     private res:FormBuilder,
@@ -45,7 +45,7 @@ export class ResendOtpComponent implements OnInit {
     if(this.resendotpform.invalid){
       return;
     }
-    this.spinner=true;
+    this.progressBar=true;
     let data = this.resendotpform.value
     this.authservice.resendOTP(data).subscribe((resend:any)=>{
 
@@ -54,7 +54,7 @@ export class ResendOtpComponent implements OnInit {
       } else {
         this.snackBar.open(resend.message)
       }
-      this.spinner=false;
+      this.progressBar=false;
     })
   }
   }

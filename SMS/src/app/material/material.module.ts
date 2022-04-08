@@ -21,6 +21,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
+
 const materialcomponents = [
   MatMenuModule,
   MatToolbarModule,
@@ -43,7 +46,8 @@ const materialcomponents = [
   MatTabsModule,
   MatTableModule,
   MatPaginatorModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatProgressBarModule
 ]
 
 @NgModule({
