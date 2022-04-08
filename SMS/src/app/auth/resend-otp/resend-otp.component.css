@@ -36,7 +36,7 @@ mat-form-field{
     width: 260px;
     height:300px;
     margin-left: 10em;
-    /* margin-top: 20em; */
+    opacity: 0.5;
     bottom: 15em;
     padding: 20px 30px;
   }  
