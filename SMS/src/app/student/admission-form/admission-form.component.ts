@@ -14,6 +14,7 @@ export class AdmissionFormComponent implements OnInit {
   admissionform: FormGroup
   form: FormGroup
   successmessage: any;
+  progressBar: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -23,10 +24,10 @@ export class AdmissionFormComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.initForm();
-   }
+  }
 
   ngOnInit() {
-   
+
   }
 
   initForm() {
@@ -47,10 +48,10 @@ export class AdmissionFormComponent implements OnInit {
         [Validators.required]
       ],
       Email: ['',
-      [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]
+        [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]
       ],
       ContactNo: ['',
-      [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
+        [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
       ],
       Gender: ['',
         [Validators.required]
@@ -68,7 +69,7 @@ export class AdmissionFormComponent implements OnInit {
         [Validators.required]
       ],
       Pincode: ['',
-        [Validators.required,Validators.minLength(6)]
+        [Validators.required, Validators.minLength(6)]
       ],
       State: ['',
         [Validators.required]
@@ -128,16 +129,18 @@ export class AdmissionFormComponent implements OnInit {
 
   submit() {
     this.admissionform.markAllAsTouched();
-    if(this.admissionform.valid){
-    let data = this.admissionform.value;
-    this.service.Admission(data).subscribe((res: any) => {
-      if (res.statusCode == 200) {
-        this.snackBar.open(res.message)
-      } else {
-        this.snackBar.open(res.message)
-      }
-    })
-  }
+    if (this.admissionform.valid) {
+      this.progressBar = true
+      let data = this.admissionform.value;
+      this.service.Admission(data).subscribe((res: any) => {
+        if (res.statusCode == 200) {
+          this.snackBar.open(res.message)
+        } else {
+          this.snackBar.open(res.message)
+        }
+        this.progressBar = false
+      })
+    }
   }
 }
 

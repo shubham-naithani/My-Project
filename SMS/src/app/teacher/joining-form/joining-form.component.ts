@@ -13,7 +13,8 @@ import { TeacherService } from '../teacher.service';
 })
 export class JoiningFormComponent implements OnInit {
   joiningform: FormGroup;
-  rejectedFormMsg: string
+  rejectedFormMsg: string;
+  progressBar: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -21,7 +22,7 @@ export class JoiningFormComponent implements OnInit {
     private service: TeacherService,
     private route: Router,
     private snackBar: MatSnackBar,
-    private adminSer:AdminService,
+    private adminSer: AdminService,
   ) {
     this.initForm();
   }
@@ -30,11 +31,11 @@ export class JoiningFormComponent implements OnInit {
     this.adminSer.rejectedFormMsgSubject.subscribe(data => {
       if (data == 'Your joining form has been rejected') {
         this.rejectedFormMsg = data
-        this.snackBar.open(this.rejectedFormMsg , 'Dismiss', {
-          duration:9000,
-          horizontalPosition:'end'
+        this.snackBar.open(this.rejectedFormMsg, 'Dismiss', {
+          duration: 9000,
+          horizontalPosition: 'end'
         })
-      }   
+      }
     })
   }
 
@@ -137,17 +138,19 @@ export class JoiningFormComponent implements OnInit {
   submit() {
     this.joiningform.markAllAsTouched();
     if (this.joiningform.valid) {
+      this.progressBar = true
       let data = this.joiningform.value;
       this.service.Joiningform(data).subscribe((res: any) => {
         if (res.statusCode == 200) {
-          this.snackBar.open(res.message,'undo',{
-            duration:3000
+          this.snackBar.open(res.message, 'undo', {
+            duration: 3000
           })
         } else {
-          this.snackBar.open(res.message,'undo',{
-            duration:3000
+          this.snackBar.open(res.message, 'undo', {
+            duration: 3000
           })
         }
+        this.progressBar = false
       })
     }
   }
