@@ -11,52 +11,51 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-  resetpass:FormGroup;
-  successmessage:any;
+  resetpass: FormGroup;
+  successmessage: any;
+  hide: boolean;
 
   constructor(
-    private rp:FormBuilder,
-    private authservice:AuthService,
-    private toast:ToastrService,
-    private route :Router,
-    private snackBar:MatSnackBar,
-    ) { 
-      this.initForm();
-    }
+    private fb: FormBuilder,
+    private authservice: AuthService,
+    private toast: ToastrService,
+    private route: Router,
+    private snackBar: MatSnackBar,
+  ) {
+    this.initForm();
+  }
 
   ngOnInit() {
-  
+
   }
 
   initForm() {
-    this.resetpass = this.rp.group({
-      Password:['',
-    [Validators.required,Validators.minLength(4),Validators.maxLength(8)]
-  ]
+    this.resetpass = this.fb.group({
+      Password: ['',
+        [Validators.required, Validators.minLength(4), Validators.maxLength(8)]
+      ]
     })
   }
-  
+
   get Password(): AbstractControl {
     return this.resetpass.get('Password') as FormControl;
   }
-  
-  get formcontrol(){return this.resetpass.controls}
 
-  submitform(){debugger
-    if(this.resetpass.invalid){
-      return;
-    }
-    if(this.resetpass.valid){
-      let data ={
-        Password:String(this.resetpass.value.Password),
-    }
-      this.authservice.resetpassword(data).subscribe((res :any) =>{
-     
-        if(res.statusCode==200){
+  get formcontrol() { return this.resetpass.controls }
+
+  submitform() {
+    this.resetpass.markAllAsTouched();
+    if (this.resetpass.valid) {
+      let data = this.resetpass.value
+      this.authservice.resetpassword(data).subscribe((res: any) => {
+
+        if (res.statusCode == 200) {
           this.snackBar.open(res.message)
           this.route.navigateByUrl("/Login");
-        }else{
+        } else {
           this.snackBar.open(res.message)
         }
       })
-  } }}
+    }
+  }
+}

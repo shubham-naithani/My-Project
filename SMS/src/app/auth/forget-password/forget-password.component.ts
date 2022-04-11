@@ -47,22 +47,26 @@ export class ForgetPasswordComponent implements OnInit {
 
   submitform() {
     this.forgetpassword.markAllAsTouched();
-    let data = this.forgetpassword.value
-    this.authservice.forgetpassword(data).subscribe((forget: any) => {
-      if (forget.statusCode == 200) {
-        if (forget.message == "Reset") {
-          this.showreset = true;
-          this.rout.navigateByUrl("/Reset-password");
-          this.snackBar.open('ok now you can reset your password')
-        } else if (forget.message == "SignUp") {
-          this.rout.navigateByUrl("/Registeration");
-          this.snackBar.open('contact no invalid signup first')
+    if (this.forgetpassword.valid) {
+      let data = this.forgetpassword.value
+      this.authservice.forgetpassword(data).subscribe((forget: any) => {
+        if (forget.statusCode == 200) {
+          if (forget.message == "Reset") {
+            this.showreset = true;
+            this.rout.navigateByUrl("/Reset-password");
+            this.snackBar.open('Ok Now You Can Reset Your Password','undo',{
+              duration:4000
+            })
+          } else if (forget.message == "SignUp") {
+            this.rout.navigateByUrl("/Registeration");
+            this.snackBar.open('Contact No Is Invalid Signup First','undo',{
+              duration:4000
+            })
+          }
+        } else {
+          this.snackBar.open('something error')
         }
-      } else {
-        this.snackBar.open('something error')
-      }
-    })
+      })
+    }
   }
-
-
 }
