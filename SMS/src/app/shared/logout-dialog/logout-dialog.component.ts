@@ -29,12 +29,10 @@ export class LogoutDialogComponent implements OnInit, OnDestroy {
     this.adminSer.logoutDialogMessageSubject.subscribe(data => {
       if (data === 'showLogOutDialog') {
         this.logoutDialogMessage = data
-        console.log(this.logoutDialogMessage)
       } else {
         this.adminSer.DeleteDialogMessageSubject.subscribe(data => {
           if (data === 'showDeleteDialog') {
             this.deleteDialogMessage = data
-            console.log(this.deleteDialogMessage)
           }
         })
       }

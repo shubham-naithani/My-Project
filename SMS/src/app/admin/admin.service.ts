@@ -49,7 +49,6 @@ export class AdminService {
 
   sendFormRejMsg(rejectedMessage: any) {
     this.rejectedFormMsgSubject.next(rejectedMessage)
-    console.log(rejectedMessage)
   }
 
 }

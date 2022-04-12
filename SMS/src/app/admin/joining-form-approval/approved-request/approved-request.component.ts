@@ -77,7 +77,6 @@ export class ApprovedRequestComponent implements OnInit {
         this.snackBar.open(res.message, 'undo', {
           duration: 3000
         })
-        console.log('get rejected req')
       }
     })
   }
