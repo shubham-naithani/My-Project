@@ -10,6 +10,8 @@ using System;
 using SchoolManagementSystem.DAL.Tabels;
 using SchoolManagementSystem.AccountModel.AdminModel;
 using SchoolManagementSystem.AccountModel;
+using SchoolManagementSystem.Services;
+using System.Collections.Generic;
 
 namespace SchoolManagementSystem.Controllers
 
@@ -19,15 +21,19 @@ namespace SchoolManagementSystem.Controllers
     public class AdminController : ControllerBase
     {
         public SMSContext sms;
+        private readonly IEmailSender _emailSender;
         public IConfiguration config;
-        public AdminController(SMSContext smscon, IConfiguration configuration)
+
+        public object Summaries { get; private set; }
+
+        public AdminController(SMSContext smscon, IConfiguration configuration, IEmailSender emailSender)
         {
             sms = smscon;
             config = configuration;
+            _emailSender = emailSender;
         }
 
-//-------------------------------------------------------          GET JOINING FORM PENDING REQUESTS      -------------------------------------------
-
+        //-------------------------------------------------------          GET JOINING FORM PENDING REQUESTS      -------------------------------------------
 
 
         [Route("get_pending_form_requests")]
@@ -105,14 +111,33 @@ namespace SchoolManagementSystem.Controllers
                     data.ClassesYouWillTeach = mod.ClassesYouWillTeach;
                     data.YourPeriods = mod.YourPeriods;
                     data.Approved = true;
-
+         
                     sms.Teacher_tbl.Update(data);
                     int isSaved = sms.SaveChanges();
                     if (isSaved > 0)
                     {
                         response.Message = data.FirstName + " " +  "joining form request has been approved";
                         response.StatusCode = HttpStatusCode.OK;
-                    }
+                        var message = new Message(new string[] 
+                        //to
+                        { "naithanishubham0@gmail.com" }, 
+                        //heading
+                        "Joining Form Approved",
+                        //body
+                        "HOGWARTS MANAGEMENT" +
+                        "CONGRATULATION {{name}}" +
+                        "Hello your teaching joinig form for HOGWARTS has been approved by Admin" +
+                        "Now you can join HOGWARTS from next 1 date" +
+                        "Your classes and periods have been refelected shortly to you account" +
+                        "Your annual salary is : 5 lakh" +
+                        "For any other question feel free to ask at" +
+                        "HogwartsHelpline@info.in" +
+                        "TNANKING YOU" +
+                        "Have A Great Day" +
+                        "ADMIN : Shubham"
+                        );
+                        _emailSender.SendEmail(message);
+                    }  
                     else
                     {
                         response.Message = "SORRY Data Not Saved";

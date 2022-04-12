@@ -48,6 +48,15 @@ namespace SchoolManagementSystem
                 });
             services.AddSwaggerGen();
             services.AddControllers();
+
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
+            services.AddScoped<IEmailSender, EmailSender>();
+
+            services.AddScoped<IEmailSender, EmailSender>();
             var con = "server=localhost;database=SchoolManagementSystem;Trusted_connection=True;";
             services.AddDbContext<SMSContext>(options => options.UseSqlServer(con));
             services.AddSingleton<SendOtp, SendOtp>();

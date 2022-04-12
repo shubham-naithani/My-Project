@@ -293,7 +293,7 @@ namespace SchoolManagementSystem.Controllers
         [Route("Reset-Password")]
         [HttpPost]
         public ApiResponse ResetPassword([FromBody] PasswordModel reset)
-        {
+            {
             ApiResponse response = new ApiResponse();
             try
             {
